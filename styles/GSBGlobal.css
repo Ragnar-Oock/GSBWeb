@@ -1,0 +1,99 @@
+/*police*/
+
+@font-face {
+	font-family: 'Roboto';
+	src: url(https://fonts.gstatic.com/s/roboto/v18/CWB0XYA8bzo0kSThX0UTuA.woff2);
+}
+
+
+
+
+/*classes*/
+
+body
+{
+	background-color: #36393e;
+	margin: 0px;
+	font-family: Roboto;
+	color
+}
+
+.color-darkblue
+{
+	color : #5283be;
+}
+
+.color-lightblue
+{
+	color : #98d9f9;
+}
+
+.color-darkgrey
+{
+	color : #36393e;
+}
+
+.color-lightgrey
+{
+	color : #c0cacd;
+}
+
+.background-color-darkblue
+{
+	background-color : #5283be;
+}
+
+.background-color-lightblue
+{
+	background-color : #98d9f9;
+}
+
+.background-color-darkgrey
+{
+	background-color : #36393e;
+}
+
+.background-color-lightgrey
+{
+	background-color : #c0cacd;
+}
+
+.top-bar
+{
+	margin: 0;
+	padding: 15px, 0px;
+	box-shadow:0px 1px 10px black;
+}
+
+.img-top-bar
+{
+	width: 80px;
+	height: 70px;
+	margin: auto, 0px;
+}
+
+.text-top-bar
+{
+	display: block;
+	position: relative;
+	vertical-align: middle;
+}
+
+.login
+{
+	font-family: Roboto;
+	box-shadow: 0px 0px 5px #BBDEFB;
+	background-color: #EEEEEE;
+	border-radius: 5px;
+}
+
+.ligne-table
+{
+	box-shadow:0px 1px 10px black;
+}
+
+.echantillon-marge
+{
+	margin-left: 150px;
+	margin-top: 50px;
+}
