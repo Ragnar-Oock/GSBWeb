@@ -27,11 +27,13 @@
 					<li><a href="index.php?choixTraitement=agents&action=voir&type=a">agents</a>|</li>
 					<li><b>Bienvenue '.$_SESSION['prenom'].'  '.strtoupper($_SESSION['nom']).' </b></li>
 					<li style="text-align:left;"><a href="index.php?choixTraitement=connexion&action=demandeConnexion" title="Se d&eacute;connecter"><img alt="déconnexion" src="images/deconnexion.png" border="0" height="26px"></a></li>
-				</ul>';
+				</ul>
+				
+				<h1>LE CASTEL : Application de demonstration MVC</h1>';
+		include("v_recherche.php");
 		}
 ?> 
-				<h1>LE CASTEL : Application de demonstration MVC</h1>
-				
+
 			</div>
 			</div>
 <!-- fin affichage du menu -->
