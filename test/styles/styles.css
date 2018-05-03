@@ -499,3 +499,8 @@ table.listeLegere td {
 	border-left: 7px solid #FFFFFF;
 	border-right: 7px solid #FFFFFF;
 }
+.resultatRecherche {
+  margin: 5px 15px 0px 15px;
+  background-color: #36393e;
+  border-radius: 5px;
+}

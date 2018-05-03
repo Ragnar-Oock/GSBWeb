@@ -24,16 +24,14 @@
 					<li><a href="index.php?choixTraitement=compteRendu&action=voir" title="compteRendu">Compte Rendu</a>|</li>
 					<li><a href="index.php?choixTraitement=choix2&action=voir" title="choix2">choix 2</a>|</li>
 					<li><a href="index.php?choixTraitement=parametres&action=voir" title="parametres">parametres</a>|</li>
-					<li><a href="index.php?choixTraitement=agents&action=voir&type=a">agents</a>|</li>
+					<li><a href="index.php?choixTraitement=praticiens&action=voir&type=a">Praticiens</a>|</li>
 					<li><b>Bienvenue '.$_SESSION['prenom'].'  '.strtoupper($_SESSION['nom']).' </b></li>
 					<li style="text-align:left;"><a href="index.php?choixTraitement=connexion&action=demandeConnexion" title="Se d&eacute;connecter"><img alt="déconnexion" src="images/deconnexion.png" border="0" height="26px"></a></li>
 				</ul>
-				
 				<h1>LE CASTEL : Application de demonstration MVC</h1>';
 		include("v_recherche.php");
 		}
 ?> 
-
 			</div>
 			</div>
 <!-- fin affichage du menu -->

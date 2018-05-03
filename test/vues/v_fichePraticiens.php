@@ -4,9 +4,8 @@
 $titre="caract&eacute;ristiques du praticien";
 echo (' 	<div id="fiche">
 			<ul class="lesOnglets">	
-				<li class="actif onglet" 	id="onglet1" onclick="javascript:Affiche(\'1\',3);">'.$titre.'</li>
-				<li class="inactif onglet" 	id="onglet2" onclick="javascript:Affiche(\'2\',3);">Usagers suivis</li>
-				<li class="inactif onglet" 	id="onglet3" onclick="javascript:Affiche(\'3\',3);">compte rendu</li>
+				<li class="actif onglet" 	id="onglet1" onclick="javascript:Affiche(\'1\',2);">'.$titre.'</li>
+				<li class="inactif onglet" 	id="onglet2" onclick="javascript:Affiche(\'2\',2);">Usagers suivis</li>
 			</ul>');
 /*================================================================================================== COORDONNEES (1) */
  $titre="Pr&eacute;nom";
@@ -17,7 +16,7 @@ echo (' 	<div id="fiche">
 				<td style='border :0px;'>
 				<fieldset><legend>Coordonn&eacute;es</legend>
 					<table>
-						<tr><th style='width:130px;'>Nom</th>			<td style='width:130px;'>".$lesInfosPraticien['nom']."</td> </tr>
+						<tr><th style='width:130px;'>Nom</th>			<td style='width:130px;'>".$lesInfosPraticien['pNom']."</td> </tr>
 						<tr><th>".$titre."</th>									<td>".$lesInfosPraticien['pNom']."</td> </tr>
 						<tr><th>Adresse</th>									<td>".$lesInfosPraticien['pRue']."</td> </tr>
 						<tr><th>Code postal</th>								<td>".$lesInfosPraticien['pCP']."</td> </tr>
@@ -91,84 +90,14 @@ echo ("		</table>
 	  		</fieldset>
 		</div>");
 
-/*================================================================================================== compte rendu (3)*/
+/*================================================================================================== XXXXX */
 echo ("
-		<div style='display: none;' class='unOnglet' id='contenuOnglet3'>
-			<fieldset><legend>compte rendu</legend>
-			echo '
-		<br><br><h2 align=center>SAISIES COMPTE RENDU </h2><br><br>	
-		<div style='display: block; overflow: auto;'><form>
-		  <p>Veuillez choisir un type de practicien :</p>
-		  <div>
-			<input type='radio' id='Practicien1'
-			 name='practicien' value='Médecin Hospitalier'>
-			<label for='Practicien1'>Médecin Hospitalier</label><br>
-
-			<input type='radio' id='Practicien2'
-			 name='practicien' value='Médecine de Ville'>
-			<label for='Practicien2'>Médecine de Ville</label><br>
-
-			<input type='radio' id='Practicien3'
-			 name='practicien' value='Pharmacien Hospitalier'>
-			<label for='Practicien3'>Pharmacien Hospitalier</label><br>
-			
-			<input type='radio' id='Practicien4'
-			 name='practicien' value='Pharmacien Officine'>
-			<label for='Practicien4'>Pharmacien Officine</label><br>
-			
-			<input type='radio' id='Practicien5'
-			 name='practicien' value='Personnel de santé'>
-			<label for='Practicien5'>Personnel de santé</label><br>
-			
-		  </div>
-		  <div>
-			<br><button type='submit'>Soumettre</button>
-		  </div>
-		</form><br></div>
-		<div style='display: block; margin-left: 950px; margin-top: -210px;'>
-		<form>
-		<p>Vos observations : <br><TEXTAREA name='nom' rows=6 cols=40></TEXTAREA>
-		</form>
-		<div style='display: block; margin-left: -300px; margin-top: -120px;'>
-		<p>Date de la visite : <input type='date' name='DateVisite'></p>
-		<p>Motif de la visite :</p>
-		<select>
-			<option value=''>Motif</option>
-			<option value='Actualisationannuelle'>Actualisation annuelle</option>
-			<option value='RapportAnnuel'>Rapport Annuel</option>
-			<option value='Baisseactivité'>Baisse activité</option>
-		</select>
-		</div>
-		
-		<div style='display: block; margin-left: -600px; margin-top: -120px;'>
-		
-		");
-		
-	$nbL=count($lesLignes);	
- echo('
- <div id="contenu">
-	<form name="choixP" action="index.php?choixTraitement=praticien&action=voir" method="post">
-	<h2>'.$titre.'
-	        <select name="lstPraticiens" STYLE="width:350px;" onchange="submit();">
-	            ');
-	            if (!isset($_REQUEST['lstPraticiens'])) {$choix = 'premier';} else {$choix =$_REQUEST['lstPraticiens'];}
-	            $i=1; 
-	            foreach ($lesLignes as $uneLigne) 
-				{	
-					if($uneLigne['pNum'] == $choix or $choix == 'premier')
-						{echo "<option selected value=\"".$uneLigne['pNum']."\">".$uneLigne['pNom']." ".$uneLigne['pPrenom']."</option>\n	";
-						$choix = $uneLigne['pNum'];
-						$noL=$i;
-						}
-					else
-						{echo "<option value=\"".$uneLigne['pNum']."\">".$uneLigne['pNom']." ".$uneLigne['pPrenom']."</option>\n		";
-						$i=$i+1;}
-				}	           
-			    echo ("
-	        </select>			
-			</h2>
-			
-
+		<div style='display: none;' class='unOnglet' id='contenuOngletX'>
+			<fieldset><legend>XXXX</legend>
+			<table>
+				<tr><th style='width:130px;'>.....</th></tr>
+				<tr><td>xxxx</td></tr>
+			</table>
 			</fieldset>
 		</div>
 

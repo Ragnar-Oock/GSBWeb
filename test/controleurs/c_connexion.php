@@ -40,7 +40,7 @@ switch($action){
 			$nom 			= $utilisateur['nom'];
 			$prenom 		= $utilisateur['prenom']; 
 			connecter($id,$nom,$prenom,$utilisateur['agStatut'],$utilisateur['agTerritoire']);		
-			header ('location: index.php?choixTraitement=praticien&action=voir');
+			header ('location: index.php?choixTraitement=praticiens&action=voir');
 		}
 		break;
 	}

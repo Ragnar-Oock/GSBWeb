@@ -50,6 +50,16 @@ class PdoBD
 		$lesLignes = $rs->fetchAll();
 		return $lesLignes; 
 	}
+	public function getLestypePraticiens()
+	{		
+		$req = "SELECT tLibelle
+					FROM typePraticien 
+					ORDER BY 1;";
+		$rs = PdoBD::$monPdo->query($req);
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des types de praticiens ..", $req, PdoBD::$monPdo->errorInfo());}
+		$lesLignesTypes = $rs->fetchAll();
+		return $lesLignesTypes; 
+	}
 	public function getInfosPraticiens($login,$mdp)
 	{
 		/*$req = "SELECT agId as id, agNom as nom, agPrenom as prenom, agStatut, agMail, agLogin, agMdp, agTerritoire, agAdresse, agCp, agVille, agTel, agCommentaire,
@@ -131,7 +141,6 @@ class PdoBD
 		$rs = PdoBD::$monPdo->exec($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de l'insertion de l'agent dans la base de donn&eacute;es.", $req, PdoBD::$monPdo->errorInfo());}
 	}
-
 /**
 	 * Retourne les informations de la table typeParametre (types de parametres)
 	*/
@@ -230,6 +239,21 @@ class PdoBD
 		if (mail($mail, $sujet, $msg, null)==false)  
 		{ echo 'Suite à un problème technique, votre message n a pas été envoyé a '.$mail.' sujet'.$sujet.'message '.$msg.' entete '.$entete;}
 	}
-}
 
+/**
+	 * Retourne les informations des AGENTS
+	*/
+	public function getLesResultats($rechercher)
+	{		
+		$req = "SELECT * 
+				FROM visite 
+				WHERE (vMotif LIKE '%".$rechercher."%') OR (vRapport LIKE '%".$rechercher."%') OR (vDate LIKE '%".$rechercher."%')";
+		//echo($req);
+		$rs = PdoBD::$monPdo->query($req);
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des visites ..", $req, PdoBD::$monPdo->errorInfo());}
+		$lesLignes = $rs->fetchAll();
+		return $lesLignes; 
+	}	
+
+}
 ?>

@@ -28,7 +28,7 @@ switch($choixTraitement)
 {
 	case 'connexion'	:		{include("controleurs/c_connexion.php");break;}
 	case 'compteRendu' 	:		{include("controleurs/c_compteRendu.php");break;}
-	case 'praticien' 	:		{include("controleurs/c_praticien.php");break;}	
+	case 'praticiens' 	:		{include("controleurs/c_praticien.php");break;}	
 	case 'parametres' 	:		{include("controleurs/c_param.php");break;}
 	case 'recherche'	:		{include("controleurs/c_recherche.php");break;}
 	default 			:		{echo 'erreur d\'aiguillage !'.$choixTraitement;break;}
