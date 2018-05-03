@@ -17,9 +17,9 @@ case 'voir':
 
 		include("vues/v_entete.php");
 		$lesLignes		=$pdo->getLesPraticiens();
-		include("vues/v_choixAgent.php");
+		include("vues/v_choixPraticiens.php");
 		$lesInfosAgent 	= $pdo->getInfosPraticiens("*",$choix);
-		include("vues/v_fichePraticien.php");
+		include("vues/v_fichePraticiens.php");
 		break;
 	}
 //----------------------------------------- FORMULAIRE DE SAISIE
@@ -30,11 +30,11 @@ case 'supprimer':
 		$formulaire		="frmA";
 		$champ			="ztNom";	
 		include("vues/v_entete.php");
-		$choix= $_REQUEST['lstAgents'];
+		$choix= $_REQUEST['lstPraticiens'];
 		$lesInfosAgent 	= $pdo->getInfosPraticiens("*",$choix);
 		$lesTerritoires = $pdo->getParametre("territo");
-		$lesStatuts		= $pdo->getParametre("statAgt");
-		include("vues/v_unPraticiens.php");
+		$lesTypesP	= $pdo->getTypePraticien();
+		include("vues/v_unPraticien.php");
 		break;
 	}
 //----------------------------------------- VALIDATION	
@@ -48,8 +48,8 @@ case 'validerSupprimer':
 			if ($action==="validerSupprimer") {$pdo->supprimePraticien($valeur);}
 			else
 				{
-				$nom		= addslashes ($_REQUEST['ztNom']);
-				$prenom		= addslashes ($_REQUEST['ztPrenom']);
+				$nom		= addslashes ($_REQUEST['pNom']);
+				$prenom		= addslashes ($_REQUEST['pPrenom']);
 				$statut		= $_REQUEST['ldrStatut'];
 				$mail		= $_REQUEST['ztMail'];
 				$login		= $_REQUEST['ztLogin'];
@@ -60,7 +60,7 @@ case 'validerSupprimer':
 				$ville			= addslashes ($_REQUEST['ztVille']);
 				if (strlen($_REQUEST['ztTel'])>1) 			{$tel	= str_replace(" ", "", $_REQUEST['ztTel']); $tel=str_replace(".", "", $tel);	$tel=str_replace("/", "", $tel);} else {$tel="Null";}
 				$commentaire	= addslashes ($_REQUEST['ztObs']);
-				if ($action==="validerAjouter") 
+				/*if ($action==="validerAjouter") 
 					{$pdo->ajoutPraticien($valeur,$nom,$prenom,$statut,$mail,$login,$mdp,$territoire,$adresse,$cp,$ville,$tel,$commentaire);
 					$sujet 	= "nouveau compte";
 					$msg = "Bonjour ".$prenom." ".$nom.", \r\nLe Castel vient de créer un compte pour vous  ...\r\n";
@@ -69,7 +69,7 @@ case 'validerSupprimer':
 					{$pdo->majPraticien($valeur,$nom,$prenom,$statut,$mail,$login,$mdp,$territoire,$adresse,$cp,$ville,$tel,$commentaire);
 					$sujet 	= "nouveau mot de passe";
 					$msg = "Bonjour ".$prenom." ".$nom.", \r\nLe Castel vient de modifier votre mot de passe  ...\r\n";
-					}		
+					}		*/
 				$entete	= "From: Pascal Blain <pascal-blain@wanadoo.fr>\r\n";
 				$entete	.= "Mime-Version: 1.0\r\n";
 				$entete	.= "Content-type: text/html; charset=utf-8\r\n";
