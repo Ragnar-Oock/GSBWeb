@@ -50,22 +50,29 @@ class PdoBD
 		$lesLignes = $rs->fetchAll();
 		return $lesLignes; 
 	}
-	public function getInfosPraticiens($login,$mdp)
+	public function getLestypePraticiens()
+	{		
+		$req = "SELECT tLibelle,tCode
+					FROM typePraticien 
+					ORDER BY 1;";
+		$rs = PdoBD::$monPdo->query($req);
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des types de praticiens ..", $req, PdoBD::$monPdo->errorInfo());}
+		$lesLignesTypes = $rs->fetchAll();
+		return $lesLignesTypes; 
+	}
+	public function getInfosPraticiens($Att, $Num)
 	{
-		/*$req = "SELECT agId as id, agNom as nom, agPrenom as prenom, agStatut, agMail, agLogin, agMdp, agTerritoire, agAdresse, agCp, agVille, agTel, agCommentaire,
-					s.pLibelle as wStatut, t.pLibelle as wTerritoire
-					FROM  agent 
-					INNER JOIN parametre as s ON (s.pType='statAgt' AND s.pIndice=agStatut) 
-					INNER JOIN parametre as t ON (t.pType='territo' AND t.pIndice=agTerritoire)";*/
-		$req = "SELECT pNum as id, pNom as nom, pPrenom as prenom, pRue, pCp, pVille, pCoefNotoriete, pCode, pRegion
-					FROM  praticien;";
-		if ($login==="*") 
+		$req = "SELECT pNum as id, pNom, pPrenom, pRue, pCP, pVille, pCoefNotoriete, pCode, pRegion, rCode, rNom
+				FROM  praticien
+				INNER JOIN region ON pRegion=rCode
+				WHERE pNum='$Num';";
+		/*if ($login==="*") 
 		{$req.=" WHERE ='$mdp'";}
 		else 
 		{$req.=" WHERE uLogin='$login' 
-				 AND uMdp='$mdp'";}
+				 AND uMdp='$mdp'";}*/
 		$rs = PdoBD::$monPdo->query($req);
-		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des informations d'un utilisateur...", $req, PdoBD::$monPdo->errorInfo());}
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des informations d'un praticien...", $req, PdoBD::$monPdo->errorInfo());}
 		$ligne = $rs->fetch();
 		return $ligne;
 	}
@@ -131,7 +138,6 @@ class PdoBD
 		$rs = PdoBD::$monPdo->exec($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de l'insertion de l'agent dans la base de donn&eacute;es.", $req, PdoBD::$monPdo->errorInfo());}
 	}
-
 /**
 	 * Retourne les informations de la table typeParametre (types de parametres)
 	*/
@@ -140,6 +146,16 @@ class PdoBD
 		$req = "SELECT tlId, tlLibelle, tlBooleen, tlChoixMultiple, tlCumul, tlTable, tlChamp
 					FROM typeParametre
 					ORDER BY tlLibelle;";
+		$rs = PdoBD::$monPdo->query($req);
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la recherche dans la base de donn&eacute;es.", $req, PdoSasti::$monPdo->errorInfo());}
+		$lesLignes = $rs->fetchAll();
+		return $lesLignes; 
+	}
+	
+	public function getRegion()
+	{
+		$req = "SELECT rCode, rLibelle
+				FROM region ";
 		$rs = PdoBD::$monPdo->query($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de la recherche dans la base de donn&eacute;es.", $req, PdoSasti::$monPdo->errorInfo());}
 		$lesLignes = $rs->fetchAll();
@@ -230,6 +246,25 @@ class PdoBD
 		if (mail($mail, $sujet, $msg, null)==false)  
 		{ echo 'Suite à un problème technique, votre message n a pas été envoyé a '.$mail.' sujet'.$sujet.'message '.$msg.' entete '.$entete;}
 	}
-}
 
+/**
+	 * Retourne les resultats de recherche
+	*/
+	public function getLesResultats($rechercher)
+	{		
+		$req = "SELECT DATE_FORMAT(visite.vDate,'%d-%m-%Y') as vDate, visite.vRapport, visite.vMotif, praticien.pNom,praticien.pPrenom, utilisateur.uNom, utilisateur.uPrenom
+				FROM visite INNER JOIN praticien ON visite.pNum=praticien.pNum
+							INNER JOIN utilisateur ON visite.uId=utilisateur.uId 
+				WHERE (vMotif LIKE '%".$rechercher."%') OR (vRapport LIKE '%".$rechercher."%') OR (vDate LIKE '%".$rechercher."%') OR (utilisateur.uNom LIKE '%".$rechercher."%') OR (utilisateur.uPrenom LIKE '%".$rechercher."%') OR (praticien.pNom LIKE '%".$rechercher."%') OR (praticien.pPrenom LIKE '%".$rechercher."%')
+				ORDER BY 'vDate'
+				LIMIT 1,500";
+		//return $req;
+
+		//echo($req);
+		$rs = PdoBD::$monPdo->query($req);
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des visites ..", $req, PdoBD::$monPdo->errorInfo());}
+		$lesLignes = $rs->fetchAll();
+		return $lesLignes; 
+	}	
+}
 ?>
