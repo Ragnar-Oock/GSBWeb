@@ -499,8 +499,21 @@ table.listeLegere td {
 	border-left: 7px solid #FFFFFF;
 	border-right: 7px solid #FFFFFF;
 }
-.resultatRecherche {
+.resultatRecherches {
   margin: 5px 15px 0px 15px;
-  background-color: #36393e;
   border-radius: 5px;
+  color: #ffffff;
+}
+.titre_resultatRecherche {
+  size: 1.3em;
+  width: 300px;
+}
+.date_resultatRecherche {
+  width: 200px;
+}
+.labelle_resultatRecherche {
+  font-weight: bold;
+}
+.valeur_resultatRecherche {
+
 }
