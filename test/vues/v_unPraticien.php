@@ -32,39 +32,61 @@ $titre="Pr&eacute;nom";
  else	//------------------------------------------------------------------------------------ cas ajout ou modification
 	 {		if ($_REQUEST['action']=="ajouter")	{unset($lesInfosPraticien);}
 	 		echo ('
-			<tr>	<th style="width:130px;">Nom</th>			<td style="width:130px;">
-					<input class="controleLong" type="text" name="ztNom" id="Nom" onblur="verifTexte(this.form, this, 55)" required value="'.$lesInfosPraticien['pNom'].'"></td> </tr>
-			<tr>	<th>'.$titre.'</th>									<td>
-					<input class="controleLong" type="text" name="ztPrenom" id="'.$titre.'" onblur="verifTexte(this.form, this, 25)" value="'.$lesInfosPraticien['pPrenom'].'"></td> </tr>');
+			<tr>	
+				<th style="width:130px;">Nom
+				<td style="width:130px;">
+					<input class="controleLong" type="text" name="ztNom" id="Nom" onblur="verifTexte(this.form, this, 55)" required value="'.$lesInfosPraticien['pNom'].'">
+			</tr>
+			<tr>
+				<th>'.$titre.'
+				<td>
+					<input class="controleLong" type="text" name="ztPrenom" id="'.$titre.'" onblur="verifTexte(this.form, this, 25)" value="'.$lesInfosPraticien['pPrenom'].'">');
 			if($_REQUEST['action']=="ajouter") {echo ("
-			<tr>	<th style='width:130px;'>Code du praticien (initiales, 3 lettres maxi)</th><td style='width:130px;'>
-					<input class='controle' type='text' name='praticien' id='code praticien' onblur='verifTexte(this.form, this, 3)'></td> </tr>");}
+			<tr>
+				<th style='width:130px;'>Code du praticien (initiales, 3 lettres maxi)</th>
+				<td style='width:130px;'>
+				<input class='controle' type='text' name='praticien' id='code praticien' onblur='verifTexte(this.form, this, 3)'></td> ");}
 			echo ('	
-	  		<tr><th>Adresse</th>			<td style="width:150px;"><input class="controleLong" type="text" name="ztAdresse" value="'.$lesInfosPraticien['pRue'].'"></td> </tr>
-			<tr><th>Code postal</th>		<td><input  class="controle" type="text"  pattern="[0-9]{5}" id="Code postal"  name="ztCP" value="'.$lesInfosPraticien['pCP'].'" >'); 
+	  		<tr>
+				<th>Adresse</th>			
+				<td style="width:150px;">
+				<input class="controleLong" type="text" name="ztAdresse" value="'.$lesInfosPraticien['pRue'].'"></td> 
+			<tr>
+				<th>Code postal</th>
+				<td><input  class="controle" type="text"  pattern="[0-9]{5}" id="Code postal"  name="ztCP" value="'.$lesInfosPraticien['pCP'].'"</td>');
 			echo ("
 			<a href=\"javascript:openCodesPostaux('ztCP','ztVille');\" title='Trouvez un code postal en France'>
 			<img src='images/cp.gif' width='16' height='13' alt='codes postaux' title='S&eacute;l&eacute;ctionnez votre code postal gr&acirc;ce &agrave; www.codes-postaux.org'></a></td> </tr>
-			<tr><th>Ville</th>				<td><input class='controleLong' type='text' name='ztVille' value='".$lesInfosPraticien['agVille']."'></td> </tr>
-			<tr> <th>Type de praticien</th>			<td><select name = 'ldrStatut' style='width:200px;'>"); 
+			<tr>
+				<th>Ville</th>
+				<td><input class='controleLong' type='text' name='ztVille' value='".$lesInfosPraticien['agVille']."'>
+			<tr>
+				<th>Type de praticien</th>
+				<td><select name = 'ldrStatut' style='width:200px;'>"); 
 			foreach ($lesTypesP as $unTypeP)
 			{	if($unTypeP['pIndice']===$lesInfosPraticien['agStatut']){$selected = "selected";}	else {$selected = null;}
 				echo '
 					<option '.$selected.' value="'.$unTypeP['pIndice'].'">'.$unTypeP['pLibelle'].'</option>';
 			}
 if ($_REQUEST['action']=="modifier") {echo ("
-			<tr><th>Nouveau mot de passe ?</th>			<td><input type='radio' name='brMdp' value='0' checked>Non <input type='radio' name='brMdp' value='1'>Oui");}
+			<tr>
+				<th>Nouveau mot de passe ?
+				<td><input type='radio' name='brMdp' value='0' checked>Non <input type='radio' name='brMdp' value='1'>Oui");}
 else {echo ("
-			<tr><th>Mot de passe </th>					<td>");}
+			<tr>
+				<th>Mot de passe 
+				<td>");}
 echo ("
 				<input class='controleLong' type='text' name='ztMdp' id='Mot de passe'></td></tr>
-			<tr><th>Territoire</th>							<td><select name='ldrTerritoire' style='width:200px;'>");
+			<tr>
+			<th>Territoire
+			<td><select name='ldrTerritoire' style='width:200px;'>");
 			foreach ($lesTerritoires as $unTerritoire)
 			{	if($unTerritoire['pIndice']===$lesInfosPraticien['pRegion']){$selected = "selected";}	else {$selected = null;}
 				echo '
 				<option '.$selected.' value="'.$unTerritoire['pIndice'].'">'.$unTerritoire['pLibelle'].'</option>';
 			} echo ("
-			</select></td> </tr>
+			</select>
 		</table>
     </fieldset>"); 
 	}

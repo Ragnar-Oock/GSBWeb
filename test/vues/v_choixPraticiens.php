@@ -1,9 +1,9 @@
-<!-- choix d'un Praticien / Derniere modification le 3 Mai 2018 par Théo Corbel   -->
+<!-- choix d'un Praticien / Derniere modification le 7 Mai 2018 par Théo Corbel   -->
 <?php
 	$nbL=count($lesLignes); 
 	echo ' 
  <div id="contenu">
-	<form name="choixP" action="index.php?choixTraitement=praticien&action=voir" method="post">
+	<form name="choixP" action="index.php?choixTraitement=praticiens&action=voir" method="post">
 	<h2>'.$titre; ?>
 	        <select name="lstPraticiens" STYLE="width:350px;" onchange="submit();">
 	            <?php 
@@ -22,15 +22,15 @@
 				}	           
 			    echo '   
 	        </select>			
-			</h2>'
+		</h2>'
 ?>
 	        <!-- ============================================================== navigation dans la liste -->
 	        <div id='navigation'>
 		        <input type="image"	id="zNouveau" 	title="Ajouter" 		src="images/ajout.gif" 			onclick="faire('choixP', 'ajouter')">
-                <input type="image"	id="zModif" 		title="Modifier" 		src="images/modif.gif" 			onclick="faire('choixP', 'modifier')">
-                <input type="image"	id="zSupprime" 	title="Supprimer"	src="images/supprimer.gif" 		onclick="faire('choixP', 'supprimer')">&nbsp;&nbsp;
+                <input type="image"	id="zModif" 	title="Modifier" 		src="images/modif.gif" 			onclick="faire('choixP', 'modifier')">
+                <input type="image"	id="zSupprime" 	title="Supprimer"		src="images/supprimer.gif" 		onclick="faire('choixP', 'supprimer')">&nbsp;&nbsp;
                 <input type="image"	id="zPremier" 	title="premier" 		src="images/goPremier.gif" 		onclick="premier('choixP','lstPraticiens')">    
-		        <input type="image" id="zPrecedent" 	title="pr&eacute;c&eacute;dent" src="images/goPrecedent.gif" onclick="precedent('choixP','lstPraticiens')"> 
+		        <input type="image" id="zPrecedent" title="pr&eacute;c&eacute;dent" src="images/goPrecedent.gif" onclick="precedent('choixP','lstPraticiens')"> 
 <?php echo '	
 				<input type="text" 	id="zNumero" value="'.$noL.'/'.$nbL.'" disabled="true" size="5" style="text-align:center;vertical-align:top;">'; ?>
 		        <input type="image" 	id="zSuivant" 	title="suivant" 		src="images/goSuivant.gif" 		onclick="suivant('choixP','lstPraticiens')">    
