@@ -1,12 +1,12 @@
 <?php
 // ****************************************'
 //  Le CASTEL-BTS SIO/ PROJET FORMATION    '
-//  Programme: c_agents.php                '
-//  Objet    : gestion des agents          '
+//  Programme: c_praticien.php             '
+//  Objet    : gestion des praticiens      '
 //  Client   : Bts SIO1                    '
-//  Version  : 1.0                         '
-//  Date     : 06/02/2014 à 16h11          '
-//  Auteur   : pascal-blain@wanadoo.fr     '
+//  Version  : 2.0                         '
+//  Date     : 07/05/2018 à 14h13          '
+//  Auteur   : theo.corbel21@gmail.com     '
 //*****************************************'
 $action = $_REQUEST['action'];
 switch($action) {
@@ -18,7 +18,7 @@ case 'voir':
 		include("vues/v_entete.php");
 		$lesLignes		=$pdo->getLesPraticiens();
 		include("vues/v_choixPraticiens.php");
-		$lesInfosAgent 	= $pdo->getInfosPraticiens("*",$choix);
+		$lesInfosPraticien 	= $pdo->getInfosPraticiens("*",$choix);
 		include("vues/v_fichePraticiens.php");
 		break;
 	}
@@ -31,8 +31,8 @@ case 'supprimer':
 		$champ			="ztNom";	
 		include("vues/v_entete.php");
 		$choix= $_REQUEST['lstPraticiens'];
-		$lesInfosAgent 	= $pdo->getInfosPraticiens("*",$choix);
-		$lesTerritoires = $pdo->getParametre("territo");
+		$lesInfosPraticien 	= $pdo->getInfosPraticiens($choix);
+		$lesTerritoires = $pdo->getRegion();
 		$lesTypesP	= $pdo->getTypePraticien();
 		include("vues/v_unPraticien.php");
 		break;
