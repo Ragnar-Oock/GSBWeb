@@ -1,4 +1,8 @@
-﻿/* Styles des divisions principales de la page */
+/*declaration des polices externes utilisées*/
+/*ajout de Roboto regular, Roboto medium et Roboto bold*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+
+/* Styles des divisions principales de la page */
 #navigation {
 	position: relative;
 	float: right;
@@ -28,10 +32,10 @@
 
 #sommaire ul li a
 {
-	vertical-align: middle;	
+	vertical-align: middle;
 	display:block;
-	float:left;   
-	width:80px; 
+	float:left;
+	width:80px;
 	text-decoration:none;
 	text-align:center;
 	/*background-color:#6495ED;
@@ -47,7 +51,7 @@
 	font-size: 16px;
 	/*background-color:#D3D3D3;
 	border-color: #696969 #DCDCDC #DCDCDC #696969;  */
-} 
+}
 #sommaire ul li ul {
  display:none;
 }
@@ -56,11 +60,10 @@
 }
 #sommaire li:hover ul li {
  float:none;
-} 
+}
 #sommaire li ul {
  position:absolute;
  }
- 
 #stats {
   position: absolute;
   top: 1em;
@@ -210,7 +213,7 @@ ul#menuList a:hover {
   margin-top:0em;
 }
 form {
-  margin-bottom:1em;  
+  margin-bottom:1em;
 }
 .corpsForm legend {
   font-weight:bold;
@@ -222,7 +225,7 @@ form {
 	width:33%;
 	margin: 0;
 	padding: 0 .5em 0 0;
-	line-height: 1.8;	
+	line-height: 1.8;
 }
 input, button, textarea, select{
   font-family:"Trebuchet MS", sans-serif;
@@ -255,7 +258,7 @@ input:hover, textarea:hover, select:hover{
 
 .stNb a:link {
 	color: red;
-  	
+
 }
 
 .stTitre {
@@ -270,9 +273,9 @@ input:hover, textarea:hover, select:hover{
   font-weight: bold;
 }
 
-/*  Le texte des messages d'erreur est de couleur rose sur fond ocre et de 
+/*  Le texte des messages d'erreur est de couleur rose sur fond ocre et de
 taille de caractères légèrement supérieure à la normale */
-.erreur{ 
+.erreur{
    background-color:rgb(237,210,229);
    color:rgb(203,28,128);
    font-size:1.1em;
@@ -287,7 +290,7 @@ taille de caractères légèrement supérieure à la normale */
    background-color:rgb(178,207,81);
    color : white;
    font-size:1.1em;
-   width : 95%  
+   width : 95%
 }
 
 .encadre {
@@ -328,7 +331,7 @@ taille de caractères légèrement supérieure à la normale */
 }
 
 /* Style pour les lignes d'en-tête des tableaux */
-#contenu th {  
+#contenu th {
    background-color:#E9F1FE; //bleu clair ou bleu plus soutenu : #77AADD;
    width:		130px;
    height:		21px;
@@ -337,7 +340,7 @@ taille de caractères légèrement supérieure à la normale */
    /*font-weight:bold;*/
    border-bottom:0.1em solid #777777;
    //font-size:1.1em;
-} 
+}
 
 #contenu td {
    border :1px solid #777777;
@@ -387,7 +390,7 @@ table.stats td {
   witdh:		33%;
 }
 
-/* Tableaux quadrillés utilisés pour l'affichage de listes avec contenu léger*/ 
+/* Tableaux quadrillés utilisés pour l'affichage de listes avec contenu léger*/
 table.listeLegere th, table.listeLegere td {
   border : dotted rgb(178,207,81) 0.1em;
   padding:0.2em;
@@ -427,7 +430,7 @@ table.listeLegere td {
   height :	26px;
 }
 
-.lesOnglets 
+.lesOnglets
 {
 	margin: 0;
 	padding:0 0 0 5px;
@@ -499,21 +502,44 @@ table.listeLegere td {
 	border-left: 7px solid #FFFFFF;
 	border-right: 7px solid #FFFFFF;
 }
-.resultatRecherches {
-  margin: 5px 15px 0px 15px;
-  border-radius: 5px;
-  color: #ffffff;
-}
-.titre_resultatRecherche {
-  size: 1.3em;
-  width: 300px;
-}
-.date_resultatRecherche {
-  width: 200px;
-}
-.labelle_resultatRecherche {
-  font-weight: bold;
-}
-.valeur_resultatRecherche {
 
+/*style grid resultats recherche*/
+.RR {
+	display: grid;
+	grid-template-columns: auto auto;
+	font-family: Roboto;
+	font-size: 400;
+	margin: 10px 15px 0px 15px;
+	padding: 5px 10px;
+	border-radius: 5px;
+	color: #ffffff;
+	-moz-transition: box-shadow .8s ease, background-color .8s ease;
+	-webkit-transition: box-shadow .8s ease , background-color .8s ease;
+	-o-transition: box-shadow .8s ease , background-color .8s ease;
+	box-shadow: 0px 5px 5px #10131840;
+	background-color: #36393e;
+}
+.RR:hover {
+	box-shadow: 0px 5px 5px #00000080;
+	background-color: #606369;
+}
+.RR div a {
+	text-decoration: none;
+	color: #82b1ff;
+}
+.RR_titre {
+	font-weight: 700;
+	font-size: 120%;
+}
+.RR_date {
+	text-align: right;
+}
+.RR_rapport {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	padding: 10px 0px;
+	text-align: justify;
+}
+.RR_labelle {
+	font-weight: 500;
 }
