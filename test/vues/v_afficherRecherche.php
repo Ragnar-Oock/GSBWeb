@@ -15,16 +15,6 @@ echo("</div>");
 foreach ($results as $unResultat)
 {
 	echo('
-				<tr style="width: 100%">
-					<td style="width: 75%">'.$unResultat["vMotif"].'</td>
-					<td style="width: 25%">'.$unResultat["vDate"].'</td>
-				<tr style="width: 100%">
-					<td>Rapport : '.$unResultat["vRapport"].'</td>
-				<tr style="width: 100%">
-					<td style="width: 50%">Praticien : '.$unResultat["pNom"].' '.$unResultat["pPrenom"].'</td>
-					<td style="width: 50%">Visteur : '.$unResultat["uNom"].' '.$unResultat["uPrenom"].'</td>
-			</table>
-		</div>
 		<div class="RR">
 			<div class="RR_titre">
 				'.$unResultat["vMotif"].'
