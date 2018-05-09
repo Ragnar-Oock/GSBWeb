@@ -15,11 +15,6 @@ echo("</div>");
 foreach ($results as $unResultat)
 {
 	echo('
-		<div>
-			<table style="margin: 5px 0px 0px 0px;
-  border-radius: 5px;
-  color: #ffffff;
-  background-color: #90a4ae;">
 				<tr style="width: 100%">
 					<td style="width: 75%">'.$unResultat["vMotif"].'</td>
 					<td style="width: 25%">'.$unResultat["vDate"].'</td>
@@ -29,6 +24,23 @@ foreach ($results as $unResultat)
 					<td style="width: 50%">Praticien : '.$unResultat["pNom"].' '.$unResultat["pPrenom"].'</td>
 					<td style="width: 50%">Visteur : '.$unResultat["uNom"].' '.$unResultat["uPrenom"].'</td>
 			</table>
+		</div>
+		<div class="RR">
+			<div class="RR_titre">
+				'.$unResultat["vMotif"].'
+			</div>
+			<div class="RR_date">
+				'.$unResultat["vDate"].'
+			</div>
+			<div class="RR_rapport">
+				<span class="RR_labelle">Rapport :</span> '.$unResultat["vRapport"].'
+			</div>
+			<div>
+				<span class="RR_labelle">Praticien :</span> <a href="#Desmons">'.$unResultat["pNom"].' '.$unResultat["pPrenom"].'</a></td>
+			</div>
+			<div>
+				<span class="RR_labelle">Visteur :</span> <a href="#Villechalane">'.$unResultat["uNom"].' '.$unResultat["uPrenom"].'</a></td>
+			</div>
 		</div>
 		');
 }
