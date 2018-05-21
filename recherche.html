@@ -15,7 +15,7 @@
     <div id="enteteBackground">
       <div id="logoGSB"></div>
 			<div id="searchBar">
-				<form name="frmSearch" action="index.php" method="GET">
+				<form name="frmSearch" action="index.php" method="GET" onkeypress="return event.keyCode != 13;">
 					<input type="hidden" name="choixTraitement" value="recherche"/>
 					<input type="hidden" name="action" value="voir"/>
 					<input id="search" type="text" placeholder="rechercher" name="recherche"/>
@@ -33,22 +33,22 @@
     </div>
     <div id="menuContent">
       <div id="pages">
-          <p>Ajouter un compte-rendu</p>
-          <p>compte-rendus</p>
-          <p>Données des praticiens</p>
+        <p>Ajouter un compte-rendu</p>
+        <p>compte-rendus</p>
+        <p>Données des praticiens</p>
       </div>
       <div id="legliste">
-          <p><a href="mailto:webmaster@gsb.io">Contacter le Webmaster</a></p>
-          <p>Mention l&eacute;gales</p>
+        <p><a href="mailto:webmaster@gsb.io">Contacter le Webmaster</a></p>
+        <p>Mention l&eacute;gales</p>
       </div>
       <div class="verticalSeparator"></div>
       <div id="panelPerso">
-          <h1>profession</h1>
-          <p>Nombre de visite ce mois-ci : 32</p>
-					<p>&eacute;chantillons distribu&eacute;s ce mois-ci : 53</p>
-					<br>
-					<p>dernière visite: <a href="#">Philipe Philipovski</a></p>
-					<p>prochaine visite: <a href="#">Boris Borisovitch</a></p>
+        <h1>profession</h1>
+        <p>Nombre de visite ce mois-ci : 32</p>
+				<p>&eacute;chantillons distribu&eacute;s ce mois-ci : 53</p>
+				<br>
+				<p>dernière visite: <a href="#">Philipe Philipovski</a></p>
+				<p>prochaine visite: <a href="#">Boris Borisovitch</a></p>
       </div>
     </div>
 	</body>
@@ -66,4 +66,10 @@
 				alert("Faites une recherche d'au moins trois caracteres.");
 			}
 		}
+		function checkEnter(e) {
+ 			e = e || event;
+ 			var txtArea = /textarea/i.test((e.target || e.srcElement).tagName);
+ 			return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
+		}
+		document.querySelector('form').onkeypress = checkEnter;
   </script>
