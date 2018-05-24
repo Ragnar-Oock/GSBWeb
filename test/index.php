@@ -16,7 +16,7 @@ require_once ("include/class.pdo.php");
 $pdo = PdoBD::getPdoBD();
 $estConnecte = estConnecte();
 
-// on vérifie que l'agent est authentifié
+//on vérifie que l'agent est authentifié
 if(!isset($_REQUEST['choixTraitement']) || !$estConnecte)
 {
 	$_REQUEST['choixTraitement'] = 'connexion';
@@ -28,11 +28,9 @@ switch($choixTraitement)
 {
 	case 'connexion'	:		{include("controleurs/c_connexion.php");break;}
 	case 'compteRendu' 	:		{include("controleurs/c_compteRendu.php");break;}
-	case 'choix2' 		:		{include("controleurs/c_choix2.php");break;}
-	case 'choix3' 		:		{include("controleurs/c_choix3.php");break;}
-	case 'praticien' 	:		{include("controleurs/c_praticien.php");break;}	
-	case 'parametres' 	:		{include("controleurs/c_param.php");break;}	
-	default :{echo 'erreur d\'aiguillage !'.$choixTraitement;break;}
+	case 'praticiens' 	:		{include("controleurs/c_praticien.php");break;}
+	case 'recherche'	:		{include("controleurs/c_recherche.php");break;}
+	default 			:		{echo 'erreur d\'aiguillage !'.$choixTraitement;break;}
 }
 include("vues/v_pied.php") ;
 ?>

@@ -18,7 +18,7 @@ switch($action){
 	unset($choix);
 	$formulaire		="frmIdentification";
 	$champ			="login";
-	include("vues/v_entete.php");
+	include("vues/v_enteteConnexion.php");
 	include("vues/v_connexion.php");
 	break;
 	}
@@ -28,9 +28,9 @@ switch($action){
 		$utilisateur 	= $pdo->getInfosUtilisateur($login,$mdp);
 
 		if(!is_array( $utilisateur)){
-			$formulaire		="frmIdentification";
-			$champ			="login";
-			include("vues/v_entete.php");
+			$formulaire = "frmIdentification";
+			$champ = "login";
+			include("vues/v_enteteConnexion.php");
 			ajouterErreur("Login ou mot de passe incorrect");
 			include("vues/v_erreurs.php");
 			include("vues/v_connexion.php");
@@ -38,16 +38,16 @@ switch($action){
 		else{
 			$id 			= $utilisateur['id'];
 			$nom 			= $utilisateur['nom'];
-			$prenom 		= $utilisateur['prenom']; 
-			connecter($id,$nom,$prenom,$utilisateur['agStatut'],$utilisateur['agTerritoire']);		
-			header ('location: index.php?choixTraitement=praticien&action=voir');
+			$prenom 		= $utilisateur['prenom'];
+			connecter($id,$nom,$prenom,$utilisateur['agStatut'],$utilisateur['agTerritoire']);
+			header ('location: index.php?choixTraitement=praticiens&action=voir');
 		}
 		break;
 	}
 	default :{
 		$formulaire			="frmIdentification";
 		$champ				="login";
-		include("vues/v_entete.php");
+		include("vues/v_enteteConnexion.php");
 		include("vues/v_connexion.php");
 		break;
 	}

@@ -2,36 +2,69 @@
        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
   <head>
-    <title>LYCEE LE CASTEL</title>
+    <title>Galaxy Swiss Bourdin</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="./styles/styles.css" rel="stylesheet" type="text/css" />
-	<link href="./styles/GSBGlobal.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico" />
   	<script src="include/proceduresJava.js" type="text/javascript"></script>
   </head>
-<?php 
-	if (isset($_REQUEST['zFormulaire']))	{$formulaire=$_REQUEST['zFormulaire'];} 
+<?php
+	if (isset($_REQUEST['zFormulaire']))	{$formulaire=$_REQUEST['zFormulaire'];}
 	if (isset($_REQUEST['zChamp']))			{$champ		=$_REQUEST['zChamp'];}
-?>	
+?>
   <body onload="donner_focus('<?php echo $formulaire."','".$champ;?>');">
-    <div id="page">
-		<div id="entete">
-	        <img src="./images/logo.png" id="logo" alt="Le Castel" title="section BTS SIO" />
-	        <div id="sommaire">
-<?php if (isset($_SESSION['idUtilisateur'])) 
-		{echo '
-				<ul>
-					<li><a href="index.php?choixTraitement=compteRendu&action=voir" title="compteRendu">Compte Rendu</a>|</li>
-					<li><a href="index.php?choixTraitement=choix2&action=voir" title="choix2">choix 2</a>|</li>
-					<li><a href="index.php?choixTraitement=parametres&action=voir" title="parametres">parametres</a>|</li>
-					<li><a href="index.php?choixTraitement=agents&action=voir&type=a">agents</a>|</li>
-					<li><b>Bienvenue '.$_SESSION['prenom'].'  '.strtoupper($_SESSION['nom']).' </b></li>
-					<li style="text-align:left;"><a href="index.php?choixTraitement=connexion&action=demandeConnexion" title="Se d&eacute;connecter"><img alt="déconnexion" src="images/deconnexion.png" border="0" height="26px"></a></li>
-				</ul>';
-		}
-?> 
-				<h1>LE CASTEL : Application de demonstration MVC</h1>
-				
-			</div>
-			</div>
+    <div id="enteteBackground">
+      <div id="logoGSB"></div>
+      <div id="searchBar">
+        <form name="frmSearch" action="index.php" method="GET">
+          <input type="hidden" name="choixTraitement" value="recherche"/>
+          <input type="hidden" name="action" value="voir"/>
+          <input id="search" type="text" placeholder="rechercher" name="recherche"/>
+          <i class="fa fa-search" onclick="longueurRecherche('frmSearch','recherche','3')"></i>
+        </form>
+      </div>
+      <div id="boutonMenu" onclick="menu('boutonMenu','menuContent')">
+        <div id="menuBar1" class="change"></div>
+        <div id="menuBar2" class="change"></div>
+        <div id="menuBar3" class="change"></div>
+      </div>
+    </div>
+    <div id="menuContent">
+      <div id="pages">
+          <p><a href="index.php?choixTraitement=compteRendu&action=ajouter" title="compteRendu">Ajouter un compte-rendu</a></p>
+          <p><a href="index.php?choixTraitement=compteRendu&action=voir" title="parametres">Voir les compte-rendus</a></p>
+          <p><a href="index.php?choixTraitement=praticiens&action=voir" title="parametres">Données des praticiens</a></p>
+      </div>
+      <div id="legliste">
+          <p><a href="mailto:webmaster@gsb.io">Contacter le Webmaster</a></p>
+          <p>Mention l&eacute;gales</p>
+          <p id="deconection"><a href="index.php?choixTraitement=connexion&action=demandeConnexion">d&eacute;connexion</a></p>
+      </div>
+      <div class="verticalSeparator"></div>
+      <div id="panelPerso">
+          <h1><?php echo ($_SESSION['prenom'].'  '.strtoupper($_SESSION['nom'])); ?></h1>
+          <p>Nombre de visite ce mois-ci : 32</p>
+          <p>&eacute;chantillons distribu&eacute;s ce mois-ci : 53</p>
+          <br>
+          <p>dernière visite: <a href="#">Philipe Philipovski</a></p>
+          <p>prochaine visite: <a href="#">Boris Borisovitch</a></p>
+      </div>
+    </div>
+    <div hight="150px"></div>
+  <script>
+    function menu(x,y) {
+      document.getElementById(x).classList.toggle("change");
+      document.getElementById(y).classList.toggle("menuHide");
+    }
+    function longueurRecherche(frm, champ, longueur) {
+      if(document.forms[frm].elements[champ].value.length >= longueur)
+      {
+        document.forms[frm].submit();
+      }
+      else{
+        alert("Faites une recherche d'au moins trois caracteres.");
+      }
+    }
+  </script>
 <!-- fin affichage du menu -->

@@ -1,7 +1,7 @@
 <?php
-/** 
+/**
  * @author 	:Pascal BLAIN, lycee le castel à Dijon
- * @version :1. 05/04/2018 
+ * @version :1. 05/04/2018
  * Classe d'acces aux donnees. Utilise les services de la classe PDO pour l'application
  * Les attributs sont tous statiques, les 4 premiers pour la connexion
  * $monPdo est de type PDO - $monPdoBD contient l'unique instance de la classe
@@ -9,17 +9,17 @@
  */
 
 class PdoBD
-{   		
+{
 	private static $serveur='mysql:host=localhost';
-	private static $bdd='dbname=gsbvisite';   		
-	private static $user='phpmyadmin';    		
-	private static $mdp='ppe24';	
+	private static $bdd='dbname=gsbvisite';
+	private static $user='phpmyadmin';
+	private static $mdp='ppe24';
 	private static $monPdo;
 	private static $monPdoBD=null;
-			
+
 	private function __construct()
 	{
-		PdoBD::$monPdo = new PDO(PdoBD::$serveur.';'.PdoBD::$bdd, PdoBD::$user, PdoBD::$mdp); 
+		PdoBD::$monPdo = new PDO(PdoBD::$serveur.';'.PdoBD::$bdd, PdoBD::$user, PdoBD::$mdp);
 		PdoBD::$monPdo->query("SET CHARACTER SET utf8");
 	}
 	public function _destruct()
@@ -34,67 +34,75 @@ class PdoBD
 	public  static function getPdoBD()
 	{
 		if(PdoBD::$monPdoBD==null)	{PdoBD::$monPdoBD= new PdoBD();}
-		return PdoBD::$monPdoBD;  
+		return PdoBD::$monPdoBD;
 	}
 
 	/**
 	 * Retourne les informations des AGENTS
 	*/
 	public function getLesPraticiens()
-	{		
+	{
 		$req = "SELECT pNum, pNom, pPrenom
-					FROM praticien 
+					FROM praticien
 					ORDER BY 2;";
 		$rs = PdoBD::$monPdo->query($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des praticiens ..", $req, PdoBD::$monPdo->errorInfo());}
 		$lesLignes = $rs->fetchAll();
-		return $lesLignes; 
+		return $lesLignes;
 	}
-	public function getInfosPraticiens($login,$mdp)
+	public function getLestypePraticiens()
 	{
-		/*$req = "SELECT agId as id, agNom as nom, agPrenom as prenom, agStatut, agMail, agLogin, agMdp, agTerritoire, agAdresse, agCp, agVille, agTel, agCommentaire,
-					s.pLibelle as wStatut, t.pLibelle as wTerritoire
-					FROM  agent 
-					INNER JOIN parametre as s ON (s.pType='statAgt' AND s.pIndice=agStatut) 
-					INNER JOIN parametre as t ON (t.pType='territo' AND t.pIndice=agTerritoire)";*/
-		$req = "SELECT pNum as id, pNom as nom, pPrenom as prenom, pRue, pCp, pVille, pCoefNotoriete, pCode, pRegion
-					FROM  praticien;";
-		if ($login==="*") 
-		{$req.=" WHERE ='$mdp'";}
-		else 
-		{$req.=" WHERE uLogin='$login' 
-				 AND uMdp='$mdp'";}
+		$req = "SELECT tLibelle,tCode
+					FROM typePraticien
+					ORDER BY 1;";
 		$rs = PdoBD::$monPdo->query($req);
-		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des informations d'un utilisateur...", $req, PdoBD::$monPdo->errorInfo());}
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des types de praticiens ..", $req, PdoBD::$monPdo->errorInfo());}
+		$lesLignesTypes = $rs->fetchAll();
+		return $lesLignesTypes;
+	}
+	public function getInfosPraticiens($Att, $Num)
+	{
+		$req = "SELECT pNum as id, pNom, pPrenom, pRue, pCP, pVille, pCoefNotoriete, pCode, pRegion, rCode, rNom
+				FROM  praticien
+				INNER JOIN region ON pRegion=rCode
+				WHERE pNum='$Num';";
+		/*if ($login==="*")
+		{$req.=" WHERE ='$mdp'";}
+		else
+		{$req.=" WHERE uLogin='$login'
+				 AND uMdp='$mdp'";}*/
+		$rs = PdoBD::$monPdo->query($req);
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des informations d'un praticien...", $req, PdoBD::$monPdo->errorInfo());}
 		$ligne = $rs->fetch();
 		return $ligne;
 	}
-	
+
 	/**
 	 * Retourne les informations d'un agent sous la forme d'un tableau associatif
 	*/
 	public function getInfosUtilisateur($login,$mdp)
 	{
-		/*$req = "SELECT agId as id, agNom as nom, agPrenom as prenom, agStatut, agMail, agLogin, agMdp, agTerritoire, agAdresse, agCp, agVille, agTel, agCommentaire,
-					s.pLibelle as wStatut, t.pLibelle as wTerritoire
-					FROM  agent 
-					INNER JOIN parametre as s ON (s.pType='statAgt' AND s.pIndice=agStatut) 
-					INNER JOIN parametre as t ON (t.pType='territo' AND t.pIndice=agTerritoire)";*/
 		$req = "SELECT uId as id, uNom as nom, uPrenom as prenom, uLogin, uMdp, uAdresse, uCp, uVille, uDateEmbauche, uSecteur, uLabo, uStatut, uPuissance, uMotorisation, region
-					FROM  utilisateur;";
-		if ($login==="*") 
-		{$req.=" WHERE uId='$mdp'";}
-		else 
-		{$req.=" WHERE uLogin='$login' 
-				 AND uMdp='$mdp'";}
+					  FROM  utilisateur
+						WHERE uLogin='$login'
+						AND uMdp='$mdp'";
+		/*if ($login==="*")
+		{
+			$req.=" WHERE uId='$mdp'";
+		}
+		else
+		{
+			$req.=" WHERE uLogin='$login'
+				 			AND uMdp='$mdp'";
+			 }*/
 		$rs = PdoBD::$monPdo->query($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des informations d'un utilisateur...", $req, PdoBD::$monPdo->errorInfo());}
 		$ligne = $rs->fetch();
 		return $ligne;
 	}
-	
+
 /**
-	* Met a jour une ligne de la table AGENT 
+	* Met a jour une ligne de la table AGENT
 */
 	public function majAgent($valeur,$nom,$prenom,$statut,$mail,$login,$mdp,$territoire,$adresse,$cp,$ville,$tel,$commentaire)
 	{
@@ -106,32 +114,31 @@ class PdoBD
 		$rs = PdoBD::$monPdo->exec($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de la mise à jour de l'agent dans la base de donn&eacute;es.", $req, PdoBD::$monPdo->errorInfo());}
 	}
-	
+
 /**
-	* supprime une ligne de la table AGENT 
+	* supprime une ligne de la table AGENT
 */
 	public function supprimeAgent($valeur)
 	{
-		$req = "DELETE 
+		$req = "DELETE
 				FROM agent
 				WHERE  agId='$valeur';";
 		$rs = PdoBD::$monPdo->exec($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de la suppression de l'agent dans la base de donn&eacute;es.", $req, PdoBD::$monPdo->errorInfo());}
 	}
-	
+
 /**
  * ajoute une ligne dans la table AGENT
 */
 	public function ajoutAgent($valeur,$nom,$prenom,$statut,$mail,$login,$mdp,$territoire,$adresse,$cp,$ville,$tel,$commentaire)
-	{			
-		$req = "INSERT INTO agent 
-					(agId,agNom,agPrenom,agStatut,agMail,agLogin,agMdp,agTerritoire,agAdresse,agCp,agVille,agTel,agCommentaire,agDateEnreg,agDateModif) 
-				VALUES 
+	{
+		$req = "INSERT INTO agent
+					(agId,agNom,agPrenom,agStatut,agMail,agLogin,agMdp,agTerritoire,agAdresse,agCp,agVille,agTel,agCommentaire,agDateEnreg,agDateModif)
+				VALUES
 					('$valeur', '$nom', '$prenom', $statut, '$mail', '$login', '$mdp', $territoire, '$adresse', $cp, '$ville', $tel,'$commentaire', NOW(), NOW());";
 		$rs = PdoBD::$monPdo->exec($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de l'insertion de l'agent dans la base de donn&eacute;es.", $req, PdoBD::$monPdo->errorInfo());}
 	}
-
 /**
 	 * Retourne les informations de la table typeParametre (types de parametres)
 	*/
@@ -143,7 +150,17 @@ class PdoBD
 		$rs = PdoBD::$monPdo->query($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de la recherche dans la base de donn&eacute;es.", $req, PdoSasti::$monPdo->errorInfo());}
 		$lesLignes = $rs->fetchAll();
-		return $lesLignes; 
+		return $lesLignes;
+	}
+
+	public function getRegion()
+	{
+		$req = "SELECT rCode, rLibelle
+				FROM region ";
+		$rs = PdoBD::$monPdo->query($req);
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la recherche dans la base de donn&eacute;es.", $req, PdoSasti::$monPdo->errorInfo());}
+		$lesLignes = $rs->fetchAll();
+		return $lesLignes;
 	}
 
 	/**
@@ -169,7 +186,7 @@ class PdoBD
 	*/
 	public function getInfosParam($type, $valeur)
 	{
-			if ($valeur=="NULL") 
+			if ($valeur=="NULL")
 			{$req = "SELECT pType, max(pIndice)+1 AS pIndice, ' ' AS pLibelle, tlLibelle, pPlancher, pPlafond
 						 FROM parametre INNER JOIN typeParametre ON typeParametre.tlId=parametre.pType
 						 WHERE pType='$type';";}
@@ -178,10 +195,10 @@ class PdoBD
 						 FROM parametre INNER JOIN typeParametre ON typeParametre.tlId=parametre.pType
 						 WHERE pType='$type'
 						 AND pIndice='$valeur';";}
-					 
+
 		$rs = PdoBD::$monPdo->query($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de la recherche dans la base de donn&eacute;es.", $req, PdoBD::$monPdo->errorInfo());}
-		$ligne = $rs->fetch();		
+		$ligne = $rs->fetch();
 		return $ligne;
 	}
 
@@ -196,26 +213,26 @@ class PdoBD
 		$rs = PdoBD::$monPdo->exec($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de la mise a jour des parametres dans la base de donn&eacute;es.", $req, PdoBD::$monPdo->errorInfo());}
 	}
-	
+
 /**
- * supprime une ligne de la table PARAMETRE 
+ * supprime une ligne de la table PARAMETRE
 */
 	public function supprimeParametre($type, $valeur)
 	{
-		$req = "DELETE 
+		$req = "DELETE
 					FROM parametre
 					WHERE pType='$type'
 					AND pIndice=$valeur;";
 		$rs = PdoBD::$monPdo->exec($req);
 	}
-	
+
 /**
  * ajoute une ligne dans la table PARAMETRE
 */
 	public function ajoutParametre($type, $valeur, $libelle,$territoire, $dep, $plancher, $plafond)
-	{	
-	$req = "INSERT INTO parametre 
-					(pType, pIndice, pLibelle, pPlancher, pPlafond) 
+	{
+	$req = "INSERT INTO parametre
+					(pType, pIndice, pLibelle, pPlancher, pPlafond)
 					VALUES ('$type', $valeur, '$libelle', $plancher, $plafond);";
 		echo $req;
 		$rs = PdoBD::$monPdo->exec($req);
@@ -226,10 +243,51 @@ class PdoBD
  * envoyer un message electronique
 */
 	public function envoyerMail($mail, $sujet, $msg, $entete)
-	{			
-		if (mail($mail, $sujet, $msg, null)==false)  
+	{
+		if (mail($mail, $sujet, $msg, null)==false)
 		{ echo 'Suite à un problème technique, votre message n a pas été envoyé a '.$mail.' sujet'.$sujet.'message '.$msg.' entete '.$entete;}
 	}
-}
 
+/**
+	 * Retourne les resultats de recherche
+	*/
+	public function getLesResultats($rechercher)
+	{
+		$req = "SELECT DATE_FORMAT(visite.vDate,'%d-%m-%Y') as vDate, visite.vRapport, visite.vMotif, praticien.pNom, praticien.pPrenom, praticien.pNum, utilisateur.uNom, utilisateur.uPrenom
+				FROM visite INNER JOIN praticien ON visite.pNum=praticien.pNum
+										INNER JOIN utilisateur ON visite.uId=utilisateur.uId
+				WHERE (vMotif LIKE '%".$rechercher."%')
+					OR (vRapport LIKE '%".$rechercher."%')
+					OR (vDate LIKE '%".$rechercher."%')
+					OR (utilisateur.uNom LIKE '%".$rechercher."%')
+					OR (utilisateur.uPrenom LIKE '%".$rechercher."%')
+					OR (praticien.pNom LIKE '%".$rechercher."%')
+					OR (praticien.pPrenom LIKE '%".$rechercher."%')
+					OR Concat(praticien.pPrenom, ' ', praticien.pNom) LIKE '%".$rechercher."%'
+					OR Concat(praticien.pNom, ' ', praticien.pPrenom) LIKE '%".$rechercher."%'
+				ORDER BY 'vDate'
+				LIMIT 1,500";
+		$rs = PdoBD::$monPdo->query($req);
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des visites ..", $req, PdoBD::$monPdo->errorInfo());}
+		$lesLignes = $rs->fetchAll();
+		return $lesLignes;
+	}
+
+	public function getCompteRendu($rechercher)
+	{
+		$req = "SELECT DATE_FORMAT(visite.vDate,'%d-%m-%Y') as vDate, visite.vRapport, visite.vMotif, praticien.pNom, praticien.pPrenom, praticien.pNum, utilisateur.uNom, utilisateur.uPrenom, commentaires.comNum, commentaires.comCommentaire, mDepotLegal, mNomCommercial
+						FROM visite INNER JOIN praticien ON visite.pNum=praticien.pNum
+												INNER JOIN utilisateur ON visite.uId=utilisateur.uId
+												INNER JOIN commentaires ON praticien.pNum=commentaires.comPrat
+												INNER JOIN medicament on commentaires.comMedoc=medicament.mDepotLegal
+						WHERE utilisateur.uId=\"".$rechercher."\"
+						ORDER BY 'vDate'
+						LIMIT 1,500";
+		echo $req;
+		$rs = PdoBD::$monPdo->query($req);
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des visites ..", $req, PdoBD::$monPdo->errorInfo());}
+		$lesLignes = $rs->fetchAll();
+		return $lesLignes;
+	}
+}
 ?>

@@ -80,7 +80,7 @@ function surligne(frm, champ, erreur)
 }
 
 // ========================= fonctions de controle de validité d'un champ texte (longueur)
-function verifTexte(frm, champ,longueur)
+function verifTexte(frm, champ, longueur)
 {
 	if(champ.value.length < 2 || champ.value.length > longueur) 
    		{surligne(frm, champ, true); return false;} 
@@ -246,3 +246,5 @@ function openCodesPostaux(codePostal, ville){
 	if(laVille == ""){	laVille = leCodePostal;}
 	window.open( 'http://www.codes-postaux.org/outils/module.php?Choix=' + escape(laVille) ,'CodePostal','scrollbars=yes, width=300, height=550');
 }
+
+

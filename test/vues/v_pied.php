@@ -1,5 +1,5 @@
 
 <!-- Division pour le pied de page -->
-   <hr /><p style="text-align:center;"><?php echo "Lyc&eacute;e Le Castel &agrave; Dijon - BTS SIO 1 - (c)2014 Blain Pascal";?></p> 
+   <footer><p>Galaxy Swiss Bourdin(c) - 2018</p></footer> 
   </body>
 </html>

@@ -1,4 +1,8 @@
-﻿/* Styles des divisions principales de la page */
+/*declaration des polices externes utilisées*/
+/*ajout de Roboto regular, Roboto medium et Roboto bold*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+
+/* Styles des divisions principales de la page */
 #navigation {
 	position: relative;
 	float: right;
@@ -23,77 +27,76 @@
 {
 	vertical-align: middle;
 	margin-left:2px;
-	float:left; /*pour IE*/
 }
 
 #sommaire ul li a
 {
-	vertical-align: middle;	
+	vertical-align: middle;
 	display:block;
-	float:left;   
-	width:80px; 
+	float:left;
+	width:80px;
 	text-decoration:none;
 	text-align:center;
-	/*background-color:#6495ED;
-	color:black;
-	//padding:5px;
-	border-width:2px;
-	border-style:solid;
-	border-color:#DCDCDC #696969 #696969 #DCDCDC;  /*pour avoir un effet "outset" avec IE */
 }
 #sommaire ul li a:hover
 {
-	color: purple; /*rgb(0,85,227);*/
+	color: purple;
 	font-size: 16px;
-	/*background-color:#D3D3D3;
-	border-color: #696969 #DCDCDC #DCDCDC #696969;  */
-} 
+}
 #sommaire ul li ul {
- display:none;
+	 display:none;
 }
 #sommaire ul li:hover ul {
- display:block;
+	 display:block;
 }
 #sommaire li:hover ul li {
- float:none;
-} 
+	 float:none;
+}
 #sommaire li ul {
- position:absolute;
+	position:absolute;
  }
- 
 #stats {
-  position: absolute;
-  top: 1em;
+	position: absolute;
+	top: 1em;
   left: 0.5em;
   background-color: #ffff00;
   font-size:0.75em;
 }
-body{
-  	background-color: #77AADD;
-	//background-image: url(imgs/FONDGLOBAL.jpg);
-	background-repeat: repeat-x;
-  	margin:0% 0%;
-  	padding : 0.6em;
-  	font-family:"Trebuchet MS",Verdana,Geneva,Arial,Helvetica,sans-serif;
-  	font-size:0.8em;
+body {
+  background-color: #77AADD;
+  margin: 0px;
+  font-family:"Trebuchet MS",Verdana,Geneva,Arial,Helvetica,sans-serif;
+  font-size:0.8em;
+}
+#backgroundConnexion {
+	position: absolute;
+	display: block;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	background-image: url('../images/logoGSB-NB.png');
+	filter: opacity(50%);
+	background-repeat: 	no-repeat;
+	background-position: center;
+	background-size: 75%;
+}
+footer {
+	position: absolute;
+	display: block;
+	bottom: 0px;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+	transform: translateX(-50%);
 }
 #page {
   	background-color:white;
   	width : 65%;
   	margin : auto ;
-  	border : 0.2em solid black;
-  	padding : 0.1em;
 }
-#entete{
-  	background-color:rgb(72,198,236);
-	color : #980101;
-	border: solid 0.1em #980101;
-	height: 122px;
-	padding: 0em;
-	border-collapse: separate;
-}
-#pied{
-  	clear : both;
+#pied {
+  clear : both;
 	border : solid 0.2em #980101;
 	margin-left : 18%;
 	margin-top : 1em;
@@ -101,7 +104,7 @@ body{
 	padding: 0.2em;
 	border-collapse: separate;
 }
-#menu{
+#menu {
 	position: relative;
 	float:right;
 	right: 0px;
@@ -113,22 +116,67 @@ body{
 	width: 160px;
 }
 
-#contenu{
-	border: none;
-	padding: 1.1em;
+#contenu {
+	display: block;
+	position: absolute;
+	left: 50%;
+	top: 0px;
+	bottom: 0px;
+	transform: translateX(-50%);
+	padding: 120px 1.1em 1.1em 1.1em;
 	background-color: white;
-	border-left :  groove 0.8em #980101;
-  	margin-top : 1.1em;
-	margin-left: 162px;   /*18%; */
-/* permet de fixer une hauteur mini sur les navigateurs modernes */
-  	min-height:27em;
-/* pour obtenir le même effet sur IE, sachant que si le contenu dépasse, il "poussera" la hauteur en ne respectant pas la norme. On se joue de ses lacunes */
-  	height:27em;
+	width: 800px;
+	box-shadow: 0px 0px 15px 0px #36393e;
+
+}
+/*style relatif a la page de connexion*/
+#contenuConnection {
+	display: block;
+	position: absolute;
+	top: calc(50vh);
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: none;
+	padding: 5px 15px;
+	background-color: white;
+	text-align: center;
+	border-radius: 15px;
 }
 
-/* pour rétablir le mauvais effet sur les nav. modernes */
-html>body #contenu{
-  height:auto;
+#login, #mdp {
+	border-right-style: none;
+	border-left-style: none;
+	border-top-style: none;
+	border-bottom: solid black 1px;
+	padding-bottom: 2px;
+	outline: none;
+	transition: border-bottom 300ms ease-in-out,
+	padding-bottom 300ms ease-in-out;
+}
+#login:focus, #mdp:focus {
+	border-right-style: none;
+	border-left-style: none;
+	border-top-style: none;
+	border-bottom: solid black 3px;
+	padding-bottom: 0px;
+	background-color: #00000000
+}
+#boutonConnextion input {
+	background-color: #36393e;
+	color: white;
+	border-style: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px 0px #36393e;
+	transition: background-color 300ms ease-in-out,
+	box-shadow 300ms ease-in-out;
+}
+#boutonConnextion input[type=reset] {
+	margin-left: 15px;
+}
+#boutonConnextion input:hover {
+	background-color: #606369;
+	box-shadow: 0px 0px 10px 0px #36393e;
 }
 
 /* style à appliquer à la balise ul d'identifiant menulist */
@@ -157,12 +205,6 @@ ul#menuList a {
 ul#menuList a:hover {
     background: rgb(0,85,227);
     color: white;
-}
-
-#entete #logo {
-  float : left;
-  width : 160px;
-  height : 122px;
 }
 
 #entete h1 {
@@ -210,7 +252,7 @@ ul#menuList a:hover {
   margin-top:0em;
 }
 form {
-  margin-bottom:1em;  
+  margin-bottom:1em;
 }
 .corpsForm legend {
   font-weight:bold;
@@ -222,7 +264,7 @@ form {
 	width:33%;
 	margin: 0;
 	padding: 0 .5em 0 0;
-	line-height: 1.8;	
+	line-height: 1.8;
 }
 input, button, textarea, select{
   font-family:"Trebuchet MS", sans-serif;
@@ -255,7 +297,7 @@ input:hover, textarea:hover, select:hover{
 
 .stNb a:link {
 	color: red;
-  	
+
 }
 
 .stTitre {
@@ -270,24 +312,33 @@ input:hover, textarea:hover, select:hover{
   font-weight: bold;
 }
 
-/*  Le texte des messages d'erreur est de couleur rose sur fond ocre et de 
+/*  Le texte des messages d'erreur est de couleur rose sur fond ocre et de
 taille de caractères légèrement supérieure à la normale */
-.erreur{ 
-   background-color:rgb(237,210,229);
-   color:rgb(203,28,128);
-   font-size:1.1em;
-   margin-left:200px;
-   width:75%;
+.erreur{
+	display: block;
+	position: relative;
+  background-color:rgb(237,210,229);
+  color:rgb(203,28,128);
+  font-size:1.1em;
+  margin-left:200px;
+  width:75%;
+}
+.erreur ul {
+	display: block;
+	position: relative;
+	width: 80%;
+	margin: auto;
+	margin-bottom:
 }
 .centre {
   text-align:center;
 }
 
 .info {
-   background-color:rgb(178,207,81);
-   color : white;
-   font-size:1.1em;
-   width : 95%  
+  background-color:rgb(178,207,81);
+  color : white;
+  font-size:1.1em;
+  width : 95%
 }
 
 .encadre {
@@ -302,33 +353,33 @@ taille de caractères légèrement supérieure à la normale */
 
 /* Style pour les liens de la page principale */
 #contenu a {
-   font-size : 1.1em;
-   color:gray;
-   text-decoration:none;
+  font-size : 1.1em;
+  color:gray;
+  text-decoration:none;
 }
 #contenu a:hover {
-   text-decoration:underline;
-   background-color : #D9BB7A;
-   font-size : 1em;
+  text-decoration:underline;
+  background-color : #D9BB7A;
+	font-size : 1em;
 }
 
 /* Style pour les parties importantes de la page principale */
 #contenu strong {
-  font-weight:bold;
+	font-weight:bold;
 }
 
 /* Styles pour les tableaux de la page principale */
 #contenu table {
-   background-color:#FFF;
-   border : 0.1em solid #777777;
-   color:black;
-   margin-right : auto ;
-   margin-left:0.2em;
-   border-collapse : collapse;
+  background-color:#FFF;
+	border : 0.1em solid #777777;
+  color:black;
+	margin-right : auto ;
+  margin-left:0.2em;
+  border-collapse : collapse;
 }
 
 /* Style pour les lignes d'en-tête des tableaux */
-#contenu th {  
+#contenu th {
    background-color:#E9F1FE; //bleu clair ou bleu plus soutenu : #77AADD;
    width:		130px;
    height:		21px;
@@ -337,7 +388,7 @@ taille de caractères légèrement supérieure à la normale */
    /*font-weight:bold;*/
    border-bottom:0.1em solid #777777;
    //font-size:1.1em;
-} 
+}
 
 #contenu td {
    border :1px solid #777777;
@@ -356,6 +407,8 @@ fieldset{
   border-radius : 12px;
   border:2px solid ;
   border-color: purple;
+	width: 350px;
+
 }
 legend{
   font-size: 20px;
@@ -387,7 +440,7 @@ table.stats td {
   witdh:		33%;
 }
 
-/* Tableaux quadrillés utilisés pour l'affichage de listes avec contenu léger*/ 
+/* Tableaux quadrillés utilisés pour l'affichage de listes avec contenu léger*/
 table.listeLegere th, table.listeLegere td {
   border : dotted rgb(178,207,81) 0.1em;
   padding:0.2em;
@@ -427,7 +480,7 @@ table.listeLegere td {
   height :	26px;
 }
 
-.lesOnglets 
+.lesOnglets
 {
 	margin: 0;
 	padding:0 0 0 5px;
@@ -498,4 +551,226 @@ table.listeLegere td {
 	border-bottom: 10px solid #AABBCC;
 	border-left: 7px solid #FFFFFF;
 	border-right: 7px solid #FFFFFF;
+}
+/*style relatif a l'affichagede l'entete*/
+#enteteBackground {
+	position: relative;
+	background-color: #36393e;
+	margin: 0px;
+	height: 80px;
+	box-shadow: 0px 0px 5px 5px #10131880;
+	z-index: 1000;
+}
+#logoGSB {
+	display: block;
+	position: absolute;
+	background-image: url("../images/logoGSB.png");
+	background-size: 156px 100px;
+	width: 156px;
+	height: 100px;
+	left: 30px;
+}
+#searchBar {
+	display: block;
+	position: absolute;
+	left: 200px;
+	right: 250px;
+	top: 50%;
+	height: 30px;
+	transform: translateY(-50%);
+}
+#search {
+	display: inline-block;
+	position: absolute;
+	top:50%;
+	transform: translateY(-50%);
+	padding: 1px 10px;
+	cursor: text;
+	border-radius: 5px 0px 0px 5px;
+	background: #5f6267;
+	border-style: none;
+	font-size: 1.5em;
+	color: white;
+	width: calc(100% - 73px);
+	height: 105%;
+	transition: box-shadow .3s ease-in-out;
+}
+#search:focus {
+	box-shadow: 0px 0px 5px 5px #10131860;
+}
+#searchBar form i {
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+	padding: 4px 13px 0px 11px;
+	font-size: 180%;
+	color: #ffffff80;
+	border-radius: 0px 5px 5px 0px;
+	background: #5f6267;
+	height: 100%;
+	transition: box-shadow .3s ease-in-out;
+}
+#search:focus + i {
+	box-shadow: 0px 0px 5px 5px #10131860;
+}
+#nomPrenom {
+	display: block;
+	position: absolute;
+	color: #ffffff80;
+	font-family: Roboto;
+	font-weight: 500;
+	font-size: 1.5em;
+	right: 105px;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+#boutonMenu {
+	display: block;
+	position: absolute;
+	cursor: pointer;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 30px;
+}
+#menuBar1, #menuBar2, #menuBar3 {
+	width: 35px;
+	height: 5px;
+	background-color: white;
+	margin: 6px 0px;
+	transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+}
+.change #menuBar1 {
+	-webkit-transform: rotate(-45deg) translate(-8px, 4px);
+	transform: rotate(-45deg) translate(-8px, 4px);
+}
+.change #menuBar2 {
+	opacity: 0;
+}
+.change #menuBar3 {
+	-webkit-transform: rotate(45deg) translate(-11px, -8px);
+  transform: rotate(45deg) translate(-11px, -8px);
+}
+
+/*style relatif a l'affichage du contenu du menu*/
+#menuContent {
+	position: absolute;
+	display: inline-grid;
+	top: -50%;
+	grid-template-columns: 1fr 1fr 2px 1fr;
+	padding-top: 20px;
+	width: 100%;
+	height: 200px;
+	background-color: #36393e;
+	color: #ffffff;
+	box-shadow: 0px 0px 5px 5px #10131880;
+	transition: top .5s ease-in-out;
+	z-index: 800;
+}
+#menuContent a {
+	text-decoration: none;
+	color: #82b1ff;
+}
+#menuContent a:hover {
+	color: #adccff;
+}
+#menuContent ul {
+	list-style: none;
+}
+#menuContent.menuHide {
+	top: 80px;
+}
+#pages {
+	height: 70%;
+	padding-left: 30px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 120%;
+	font-weight: 700;
+}
+#pages p a {
+	color: white;
+}
+#pages p a:hover {
+	color: white;
+}
+#legliste {
+	height: 100%;
+	text-align: right;
+	padding-right: 30px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	line-height: 80%;
+}
+#deconection a {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	line-height: 187px;
+	color: white;
+}
+#deconection a:hover {
+	color: red;
+}
+.verticalSeparator {
+	height: 50%;
+	margin: auto 0px;
+	background-color: #FFFFFF4d;
+}
+#panelPerso {
+	height: 100%;
+	padding-left: 30px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	line-height: 80%;
+}
+#panelPerso h1 {
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 120%;
+	font-weight: 700;
+	padding-bottom: 1.5em;
+}
+
+
+/*style relatif a l'affichage des resultats de recherche*/
+.RR {
+	display: grid;
+	grid-template-columns: auto auto;
+	font-family: Roboto;
+	font-size: 400;
+	margin: 10px 15px 0px 15px;
+	padding: 5px 10px;
+	border-radius: 5px;
+	color: #ffffff;
+	-moz-transition: box-shadow .8s ease, background-color .8s ease;
+	-webkit-transition: box-shadow .8s ease , background-color .8s ease;
+	-o-transition: box-shadow .8s ease , background-color .8s ease;
+	box-shadow: 0px 5px 5px #10131840;
+	background-color: #36393e;
+}
+.RR:hover {
+	box-shadow: 0px 5px 5px #00000080;
+	background-color: #606369;
+}
+.RR div a {
+	text-decoration: none;
+	color: #82b1ff;
+}
+.RR_titre {
+	font-weight: 700;
+	font-size: 120%;
+}
+.RR_date {
+	text-align: right;
+}
+.RR_rapport {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	padding: 10px 0px;
+	text-align: justify;
+}
+.RR_label {
+	font-weight: 500;
 }
