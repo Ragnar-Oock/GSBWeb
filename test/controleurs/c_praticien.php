@@ -1,13 +1,4 @@
 <?php
-// ****************************************'
-//  Le CASTEL-BTS SIO/ PROJET FORMATION    '
-//  Programme: c_praticien.php             '
-//  Objet    : gestion des praticiens      '
-//  Client   : Bts SIO1                    '
-//  Version  : 2.0                         '
-//  Date     : 07/05/2018 à 14h13          '
-//  Auteur   : theo.corbel21@gmail.com     '
-//*****************************************'
 $action = $_REQUEST['action'];
 switch($action) {
 case 'voir':

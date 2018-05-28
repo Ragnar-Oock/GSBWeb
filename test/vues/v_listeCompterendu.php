@@ -15,35 +15,29 @@ echo("</div>");
 foreach ($lesCompteRendu as $unCR)
 {
 	echo('
-		<div class="CR">
+		<div class="RR">
 			<div class="CR_titre">
-				'.$unCR["vMotif"].'
+				'.$unCR["pLibelle"].'
 			</div>
-			<div class="CR_date">
-				'.$unCR["vDate"].'
-			</div>
-			<div>
-				<span class="CR_label">Praticien :</span> <a href="index.php?choixTraitement=praticiens&action=voir&type=a" onclick="lienPraticien('.$unCR["pNum"].')">'.$unCR["pNom"].' '.$unCR["pPrenom"].'</a>
+			<div class="RR_date">
+				'.$unCR["Date"].'
 			</div>
 			<div>
-				<span class="CR_label">Visteur :</span> <a href="#">'.$unCR["uNom"].' '.$unCR["uPrenom"].'</a>
+				<span class="RR_label">Praticien :</span> <a href="index.php?choixTraitement=praticiens&action=voir&type=a" onclick="lienPraticien('.$unCR["pNum"].')">'.$unCR["pNom"].' '.$unCR["pPrenom"].'</a>
 			</div>
-			<div class="CR_rapport">
-				<span class="CR_label">Rapport :</span> '.$unCR["vRapport"].'
+			<div>
+				<span class="RR_label">Visteur :</span> <a href="#">'.$unCR["uNom"].' '.$unCR["uPrenom"].'</a>
 			</div>
-			<div class="CR_medoc">
-				 <span class="CR_label">Médicament concerné :</span> '.$unCR["mNomCommercial"].'
+			<div class="RR_rapport">
+				<span class="RR_label">Rapport :</span> '.$unCR["vRapport"].'
 			</div>
-			<div class="CR_commentaire">
-				<span class="CR_label">Commentaires du praticien :</span> '.$unCR["comCommentaire"].'
+			<div class="RR_medoc">
+				 <span class="RR_label">Médicament concerné :</span> '.$unCR["mNomCommercial"].'
+			</div>
+			<div class="RR_commentaire">
+				<span class="RR_label">Commentaires du praticien :</span> '.$unCR["comCommentaire"].'
 			</div>
 		</div>
 		');
 }
 ?>
-<script>
-	function lienPraticien(id) {
-		<?php $_REQUEST["lstPraticiens"]==id;
-		$rewrite = '1'?>
-	}
-</script>

@@ -46,13 +46,13 @@ case 'liste':
 case 'ajouter':
 case 'modifier':
 case 'supprimer':
-	{ 
+	{
 		include("vues/v_entete.php");
 		$infosParam = $pdo->getInfosParam($type, $valeur);
 		include("vues/v_unParam.php");
 		break;
 	}
-//----------------------------------------- VALIDATIONS	
+//----------------------------------------- VALIDATIONS
 case 'validerAjouter':
 	{// enregistrement de la ligne et retour
 		echo $_REQUEST['zOk']; break;
@@ -61,19 +61,19 @@ case 'validerAjouter':
 	}
 //----------------------------------------- MODIFICATION
 case 'validerModifier':
-	{ 
-		if ($_REQUEST['zOk']=="OK") {$pdo->majParametre($type, $valeur, addslashes ($_REQUEST['zLibelle']), $_REQUEST['zTerritoire'], $_REQUEST['zDep'], $plancher, $plafond);}	
+	{
+		if ($_REQUEST['zOk']=="OK") {$pdo->majParametre($type, $valeur, addslashes ($_REQUEST['zLibelle']), $_REQUEST['zTerritoire'], $_REQUEST['zDep'], $plancher, $plafond);}
 		header ('location: index.php?choixTraitement=parametres&action=voir&lstParam='.$type);
 		break;
 	}
 //----------------------------------------- SUPPRESSION
 case 'validerSupprimer':
-	{ 
-		if ($_REQUEST['zOk']=="OK") {$pdo->supprimeParametre($type, $valeur);}	
+	{
+		if ($_REQUEST['zOk']=="OK") {$pdo->supprimeParametre($type, $valeur);}
 		header ('location: index.php?choixTraitement=parametres&action=voir&lstParam='.$type);
 		break;
 	}
-	
+
 default :
 	{
 		echo 'erreur d\'aiguillage !'.$action;

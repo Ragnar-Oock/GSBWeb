@@ -26,6 +26,10 @@ switch($action){
 		$login 			= $_REQUEST['login'];
 		$mdp 			= $_REQUEST['mdp'];
 		$utilisateur 	= $pdo->getInfosUtilisateur($login,$mdp);
+		$_SESSION['uid']=$utilisateur['id'];
+		$_SESSION['derniereVisiteNP']=$utilisateur['derniereVisite'];
+		$_SESSION['derniereVisiteDate']=$utilisateur['visiteDate'];
+		$_SESSION['nbVisite']=$utilisateur['nbVisite'];
 
 		if(!is_array( $utilisateur)){
 			$formulaire = "frmIdentification";

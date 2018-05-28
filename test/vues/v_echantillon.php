@@ -1,21 +1,15 @@
-
-<table class="color-lightgrey echantillon-marge ">
-	<tr class="ligne-table ">
+<table class="EC">
+	<tr>
 		<th>Nom commercial
 		<th>Quantité
 	</tr>
 	<?php
-	$maRequete="SELECT medicament.mNum, medicament.mNomCommercial
-				FROM medicament
-				ORDER BY 2";
-	$monJeuResultats = $bdd->query($maRequete);
-	$lesLignes = $monJeuResultats->fetchAll();
-	foreach ($lesLignes as $uneLigne)
+	foreach ($lesEchantillons as $unEchantillon)
 		{
-			echo("	<tr class=\"ligne-table\">
-			<td>".$uneLigne['mNomCommercial']."</td>
-			<td> <input type=\"number\" name=".$uneLigne['mNum']." onClick=\"this.select();\" min=\"0\" max=\"10\" value=0></td>
-			</tr>");
+			echo("	<tr class=\"EC_ligne\">
+								<td>".$unEchantillon['mNomCommercial']."
+								<td><input type=\"number\" name=\"".$unEchantillon['mNum']."\" onClick=\"this.select();\" min=\"0\" max=\"10\" value=0>
+							</tr>");
 		}
 	?>
 </table>

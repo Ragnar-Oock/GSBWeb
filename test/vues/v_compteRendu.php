@@ -9,23 +9,7 @@ echo ("
 				<br><br><h2 align=center>SAISIES COMPTE RENDU </h2><br><br>	
 									<div style='display: block; margin-left: -600px; margin-top: -120px;'>
 					<form>
-						<p>Veuillez choisir un type de practicien :</p>
-						<div>
-							<input type='radio' id='Practicien1' name='practicien' value='Médecin Hospitalier'>
-							<label for='Practicien1'>Médecin Hospitalier</label><br>
-	
-							<input type='radio' id='Practicien2' name='practicien' value='Médecine de Ville'>
-							<label for='Practicien2'>Médecine de Ville</label><br>
-	
-							<input type='radio' id='Practicien3' name='practicien' value='Pharmacien Hospitalier'>
-							<label for='Practicien3'>Pharmacien Hospitalier</label><br>
-				
-							<input type='radio' id='Practicien4' name='practicien' value='Pharmacien Officine'>
-							<label for='Practicien4'>Pharmacien Officine</label><br>
-				
-							<input type='radio' id='Practicien5' name='practicien' value='Personnel de santé'>
-							<label for='Practicien5'>Personnel de santé</label><br>
-						</div>
+						
 						<div>
 							<br><button type='submit'>Soumettre</button>
 						</div>

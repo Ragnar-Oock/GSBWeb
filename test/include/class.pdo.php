@@ -82,19 +82,30 @@ class PdoBD
 	*/
 	public function getInfosUtilisateur($login,$mdp)
 	{
-		$req = "SELECT uId as id, uNom as nom, uPrenom as prenom, uLogin, uMdp, uAdresse, uCp, uVille, uDateEmbauche, uSecteur, uLabo, uStatut, uPuissance, uMotorisation, region
-					  FROM  utilisateur
+		$req = "SELECT	utilisateur.uId as id,
+		 								uNom as nom,
+										uPrenom as prenom,
+										uLogin,
+										uMdp,
+										uAdresse,
+										uCp,
+										uVille,
+										uDateEmbauche,
+										uSecteur,
+										uLabo,
+										uStatut,
+										uPuissance,
+										uMotorisation,
+										region,
+										Concat(praticien.pNom, \" \",praticien.pPrenom) as derniereVisite,
+										DATE_FORMAT(visite.vDate,'%W %d %b %Y') as visiteDate,
+										COUNT(visite.vNum) as nbVisite
+					  FROM  utilisateur INNER JOIN visite ON utilisateur.uId=visite.uid
+															INNER JOIN praticien ON praticien.pNum=visite.pNum
 						WHERE uLogin='$login'
-						AND uMdp='$mdp'";
-		/*if ($login==="*")
-		{
-			$req.=" WHERE uId='$mdp'";
-		}
-		else
-		{
-			$req.=" WHERE uLogin='$login'
-				 			AND uMdp='$mdp'";
-			 }*/
+									AND uMdp='$mdp'
+						ORDER BY visite.vDate DESC
+						LIMIT 1";
 		$rs = PdoBD::$monPdo->query($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des informations d'un utilisateur...", $req, PdoBD::$monPdo->errorInfo());}
 		$ligne = $rs->fetch();
@@ -248,9 +259,9 @@ class PdoBD
 		{ echo 'Suite à un problème technique, votre message n a pas été envoyé a '.$mail.' sujet'.$sujet.'message '.$msg.' entete '.$entete;}
 	}
 
-/**
-	 * Retourne les resultats de recherche
-	*/
+/*
+ * Retourne les resultats de recherche
+ */
 	public function getLesResultats($rechercher)
 	{
 		$req = "SELECT DATE_FORMAT(visite.vDate,'%d-%m-%Y') as vDate, visite.vRapport, visite.vMotif, praticien.pNom, praticien.pPrenom, praticien.pNum, utilisateur.uNom, utilisateur.uPrenom
@@ -265,7 +276,7 @@ class PdoBD
 					OR (praticien.pPrenom LIKE '%".$rechercher."%')
 					OR Concat(praticien.pPrenom, ' ', praticien.pNom) LIKE '%".$rechercher."%'
 					OR Concat(praticien.pNom, ' ', praticien.pPrenom) LIKE '%".$rechercher."%'
-				ORDER BY 'vDate'
+				ORDER BY 'visite.vDate' DESC
 				LIMIT 1,500";
 		$rs = PdoBD::$monPdo->query($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des visites ..", $req, PdoBD::$monPdo->errorInfo());}
@@ -273,21 +284,58 @@ class PdoBD
 		return $lesLignes;
 	}
 
-	public function getCompteRendu($rechercher)
+	public function getCompteRendu($uid)
 	{
-		$req = "SELECT DATE_FORMAT(visite.vDate,'%d-%m-%Y') as vDate, visite.vRapport, visite.vMotif, praticien.pNom, praticien.pPrenom, praticien.pNum, utilisateur.uNom, utilisateur.uPrenom, commentaires.comNum, commentaires.comCommentaire, mDepotLegal, mNomCommercial
-						FROM visite INNER JOIN praticien ON visite.pNum=praticien.pNum
-												INNER JOIN utilisateur ON visite.uId=utilisateur.uId
-												INNER JOIN commentaires ON praticien.pNum=commentaires.comPrat
-												INNER JOIN medicament on commentaires.comMedoc=medicament.mDepotLegal
-						WHERE utilisateur.uId=\"".$rechercher."\"
-						ORDER BY 'vDate'
-						LIMIT 1,500";
-		echo $req;
+		$req = "SELECT DATE_FORMAT(visite.vDate,'%W %d %b %Y') as Date, visite.vRapport, parametre.pLibelle, utilisateur.uNom, utilisateur.uPrenom, praticien.pNom, praticien.pPrenom, medicament.mNomCommercial, commentaires.comCommentaire
+						FROM visite INNER JOIN utilisateur ON visite.uId=utilisateur.uId
+							INNER JOIN praticien ON visite.pNum=praticien.pNum
+    					INNER JOIN commentaires ON commentaires.comVisit=utilisateur.uId
+    					INNER JOIN medicament ON commentaires.comMedoc=medicament.mNum
+    					INNER JOIN parametre ON visite.vMotif = parametre.pIndice
+						WHERE visite.uId=\"".$uid."\"
+							AND commentaires.comDate=visite.vDate
+    					AND parametre.pType = \"typeVis\"
+						ORDER BY vDate";
 		$rs = PdoBD::$monPdo->query($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des visites ..", $req, PdoBD::$monPdo->errorInfo());}
 		$lesLignes = $rs->fetchAll();
 		return $lesLignes;
+	}
+	public function getInfoEntete($uid)
+	{
+		$req="SELECT praticien.pNom, praticien.pPrenom, visite.vDate, COUNT(visite.vNum) as nbVisite
+					FROM visite INNER JOIN praticien ON praticien.pNum=visite.pNum
+					WHERE visite.uId=\"".$uid."\"
+					ORDER BY visite.vDate DESC
+					LIMIT 1";
+		$rs = PdoBD::$monPdo->query($req);
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des visites ..", $req, PdoBD::$monPdo->errorInfo());}
+		$lesLignes = $rs->fetchAll();
+		return $lesLignes;
+	}
+	public function getEchantillon()
+	{
+		$req="SELECT medicament.mNum, medicament.mNomCommercial
+					FROM medicament
+					ORDER BY 2";
+		$rs = PdoBD::$monPdo->query($req);
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des visites ..", $req, PdoBD::$monPdo->errorInfo());}
+		$lesLignes = $rs->fetchAll();
+		return $lesLignes;
+	}
+	public function getNouvelleVisiteNum($uid)
+	{
+		$req="SELECT COUNT(visite.vNum) as nbVisiteExistantes FROM visite WHERE uId=\"".$uid."\" GROUP BY uId";
+		$rs = PdoBD::$monPdo->query($req);
+		if ($rs === false) {afficherErreurSQL("Probleme lors de la lecture des visites ..", $req, PdoBD::$monPdo->errorInfo());}
+		$lesLignes = $rs->fetch();
+		$vNum=$lesLignes['nbVisiteExistantes']+1;
+		return $vNum;
+	}
+	public function AjouterEchantillon($uid, $vNum, $mDeoptLegal, $qte){
+		$req="INSERT INTO `offrir` (`uId`, `vNum`, `mDepotLegal`, `OFF_QTE`)
+					VALUES 	('a131', '5', 'DEPRIL9', '5')";
+		$rs = PdoBD::$monPdo->execute($req);
 	}
 }
 ?>

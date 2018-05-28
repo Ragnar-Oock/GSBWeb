@@ -126,8 +126,7 @@ footer {
 	padding: 120px 1.1em 1.1em 1.1em;
 	background-color: white;
 	width: 800px;
-	box-shadow: 0px 0px 15px 0px #36393e;
-
+	box-shadow: 0px 0px 15px 0px #36393e80;
 }
 /*style relatif a la page de connexion*/
 #contenuConnection {
@@ -141,25 +140,21 @@ footer {
 	background-color: white;
 	text-align: center;
 	border-radius: 15px;
+	width: 300px;
 }
-
-#login, #mdp {
-	border-right-style: none;
-	border-left-style: none;
-	border-top-style: none;
+#login, #mdp, #login:-webkit-autofill, #mdp:-webkit-autofill {
+	border-style: none;
 	border-bottom: solid black 1px;
-	padding-bottom: 2px;
 	outline: none;
-	transition: border-bottom 300ms ease-in-out,
-	padding-bottom 300ms ease-in-out;
+	background-color: transparent;
+	transition: border-bottom 300ms ease-in-out;
 }
 #login:focus, #mdp:focus {
-	border-right-style: none;
-	border-left-style: none;
-	border-top-style: none;
-	border-bottom: solid black 3px;
+	box-shadow: 0px 6px 5px -5px #36393e;
 	padding-bottom: 0px;
-	background-color: #00000000
+	background-color: #00000000;
+	border-style: none;
+	outline: none;
 }
 #boutonConnextion input {
 	background-color: #36393e;
@@ -407,7 +402,6 @@ fieldset{
   border-radius : 12px;
   border:2px solid ;
   border-color: purple;
-	width: 350px;
 
 }
 legend{
@@ -558,7 +552,7 @@ table.listeLegere td {
 	background-color: #36393e;
 	margin: 0px;
 	height: 80px;
-	box-shadow: 0px 0px 5px 5px #10131880;
+	box-shadow: 0px 0px 15px 0px #10131880;
 	z-index: 1000;
 }
 #logoGSB {
@@ -596,7 +590,8 @@ table.listeLegere td {
 	transition: box-shadow .3s ease-in-out;
 }
 #search:focus {
-	box-shadow: 0px 0px 5px 5px #10131860;
+	box-shadow: 0px 0px 15px 0px #10131840;
+	outline: none;
 }
 #searchBar form i {
 	position: absolute;
@@ -615,17 +610,36 @@ table.listeLegere td {
 #search:focus + i {
 	box-shadow: 0px 0px 5px 5px #10131860;
 }
-#nomPrenom {
+#deconection {
 	display: block;
 	position: absolute;
-	color: #ffffff80;
-	font-family: Roboto;
-	font-weight: 500;
-	font-size: 1.5em;
-	right: 105px;
 	top: 50%;
-	-webkit-transform: translateY(-50%);
 	transform: translateY(-50%);
+	right: 85px;
+	text-transform: uppercase;
+	cursor: pointer;
+	font-size: 16px;
+	letter-spacing: 1px;
+	color: white;
+	padding-left: 15px;
+	padding-right: 15px;
+	transition: background-color 300ms ease-in-out;
+	height: 38px;
+	border-radius: 3px;
+}
+#deconection p {
+	margin-top: 9px;
+}
+#deconection a {
+	color: white;
+	text-decoration: none;
+	transition: color 300ms ease-in-out;
+}
+#deconection:hover {
+	background-color: #5f6267;
+}
+#deconection:hover a {
+	color: red;
 }
 #boutonMenu {
 	display: block;
@@ -704,18 +718,9 @@ table.listeLegere td {
 	letter-spacing: 1px;
 	line-height: 80%;
 }
-#deconection a {
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	line-height: 187px;
-	color: white;
-}
-#deconection a:hover {
-	color: red;
-}
 .verticalSeparator {
-	height: 50%;
-	margin: auto 0px;
+	height: 90%;
+	margin: 0px 0px 10%;
 	background-color: #FFFFFF4d;
 }
 #panelPerso {
@@ -737,22 +742,37 @@ table.listeLegere td {
 /*style relatif a l'affichage des resultats de recherche*/
 .RR {
 	display: grid;
-	grid-template-columns: auto auto;
+	grid-template-columns: 50% 50%;
+	width: 800px;
 	font-family: Roboto;
 	font-size: 400;
-	margin: 10px 15px 0px 15px;
+	margin: 10px auto 0px auto;
 	padding: 5px 10px;
 	border-radius: 5px;
 	color: #ffffff;
 	-moz-transition: box-shadow .8s ease, background-color .8s ease;
 	-webkit-transition: box-shadow .8s ease , background-color .8s ease;
 	-o-transition: box-shadow .8s ease , background-color .8s ease;
-	box-shadow: 0px 5px 5px #10131840;
+	box-shadow: 0px 5px 5px #10131880;
 	background-color: #36393e;
+	box-sizing: border-box;
 }
 .RR:hover {
-	box-shadow: 0px 5px 5px #00000080;
-	background-color: #606369;
+	box-shadow: 0px 7px 8px #10131850;
+	background-color: #4d5056;
+}
+.RR_count {
+	display: block;
+	background-color: #4d5056;
+	width: 800px;
+	margin: 5px auto;
+	padding: 5px 10px;
+	box-sizing: border-box;
+	box-shadow: 0px 5px 5px #10131880;
+	border-radius: 5px;
+	color: white;
+	font-family: Roboto;
+	font-size: 400;
 }
 .RR div a {
 	text-decoration: none;
@@ -773,4 +793,12 @@ table.listeLegere td {
 }
 .RR_label {
 	font-weight: 500;
+}
+
+/*style echantillon*/
+.EC {
+	display: block;
+}
+.EC_ligne {
+
 }

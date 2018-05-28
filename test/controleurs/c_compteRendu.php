@@ -13,12 +13,12 @@ $action = $_REQUEST['action'];
 switch($action) {
 case 'voir':
 	{
-		$formulaire		="choixP";
-		$champ			="lstPraticiens";
-		$titre          ="Nom et prenom";
+		$formulaire="choixP";
+		$champ="lstPraticiens";
+		$titre="Nom et prenom";
 		include("vues/v_entete.php");
-		$lesLignes		=$pdo->getLesPraticiens();
-		if ($rid != NULL)
+		$lesLignes=$pdo->getLesPraticiens();
+		/*if ($rid != NULL)
 		{
 			$results = $pdo->getCompteRendu($id);
 		}
@@ -26,32 +26,61 @@ case 'voir':
 		{
 			$results 		=$pdo->getCompteRendu($rid);
 			$rid = NULL ;
-		}
-		//include("vues/v_choixPraticien.php");
+		}*/
 		$choix=1;
-		$lesCompteRendu 	= $pdo->getCompteRendu("*",$choix);
-		include("vues/v_echantillon.php");
+		$lesCompteRendu 	= $pdo->getCompteRendu($_SESSION['uid']);
+		include("vues/v_listeCompterendu.php");
 		break;
 	}
 //----------------------------------------- FORMULAIRE DE SAISIE
 case 'ajouter':
-	$lesLignes		=$pdo->getLesPraticiens();
-	{include("vues/v_saisieCompteRendu.php");}
+	{
+		include("vues/v_entete.php");
+		$lesLignes		=$pdo->getLesPraticiens();
+		$lesMotifs =$pdo->getParametre("typeVis","*");
+		$lesEchantillons=$pdo->getEchantillon();
+		include("vues/v_saisieCompteRendu_.php");
+		/*foreach ($lesEchantillons as $unEchantillon) {
+			if ($unEchantillon['mNum']!=0) {
+				array_push($lesEchantillonValide[]=$unEchantillon['mNum']);
+			}
+		}
+		$vNum = getNouvelleVisiteNum($_SESSION['iud']);
+		foreach ($lesEchantillonValide as $unEchantillonValide) {
+			AjouterEchantillon($_SESSION['iud'], $vNum, $unEchantillonValide, );
+		}*/
+		break;
+	}
 case 'modifier':
 case 'supprimer':
 	{
-		$formulaire		="frmA";
-		$champ			="ztNom";
+		$formulaire="frmA";
+		$champ="ztNom";
 		include("vues/v_entete.php");
 		$choix= $_REQUEST['lstPraticiens'];
-		$lesInfosPraticien 	= $pdo->getInfosPraticien("*",$choix);
-		$lesTerritoires = $pdo->getParametre("territo");
-		$lesStatuts		= $pdo->getParametre("statAgt");
+		$lesInfosPraticien 	= $pdo->getInfosPraticiens("*",$choix);
+		/*$lesTerritoires = $pdo->getParametre("territo");
+		$lesStatuts		= $pdo->getParametre("statAgt");*/
 		include("vues/v_unPraticien.php");
+		include("vues/v_echantillon.php");
 		break;
 	}
 //----------------------------------------- VALIDATION
-case 'validerAjouter':
+case 'validerAjouter': {
+	$ligne=0;
+	$lesEchantillons=$pdo->getEchantillon();
+	foreach ($lesEchantillons as $unEchantillon) {
+		if ($_REQUEST[$unEchantillon['mNum']]!=0) {
+			$lesEchantillonsValide[$ligne][0]=$unEchantillon['mNum'];
+			$lesEchantillonsValide[$ligne][1]=$_REQUEST[$unEchantillon['mNum']];
+			$ligne++;
+		}
+	}
+	foreach ($lesEchantillonsValide as $unEchantillonValide) {
+		echo $unEchantillonValide[0]." Quantité: ".$unEchantillonValide[1]."<br>";
+	}
+	break;
+}
 case 'validerModifier':
 case 'validerSupprimer':
 	{

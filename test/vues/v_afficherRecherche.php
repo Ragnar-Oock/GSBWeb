@@ -1,7 +1,7 @@
 <?php
 echo("
-	<div>
-		Il y a : ".count($results));
+	<div class=\"RR_count\">
+		Nous avons trouvé ".count($results));
 if(count($results)>1)
 {
 	echo(" résultats.");

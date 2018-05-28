@@ -24,6 +24,9 @@
           <i class="fa fa-search" onclick="longueurRecherche('frmSearch','recherche','3')"></i>
         </form>
       </div>
+      <div id="deconection">
+        <p><a href="index.php?choixTraitement=connexion&action=demandeConnexion">d&eacute;connexion</a></p>
+      </div>
       <div id="boutonMenu" onclick="menu('boutonMenu','menuContent')">
         <div id="menuBar1" class="change"></div>
         <div id="menuBar2" class="change"></div>
@@ -37,18 +40,16 @@
           <p><a href="index.php?choixTraitement=praticiens&action=voir" title="parametres">Données des praticiens</a></p>
       </div>
       <div id="legliste">
-          <p><a href="mailto:webmaster@gsb.io">Contacter le Webmaster</a></p>
+          <p><a href="mailto:webmaster@gsb.fr">Contacter le Webmaster</a></p>
           <p>Mention l&eacute;gales</p>
-          <p id="deconection"><a href="index.php?choixTraitement=connexion&action=demandeConnexion">d&eacute;connexion</a></p>
       </div>
       <div class="verticalSeparator"></div>
       <div id="panelPerso">
           <h1><?php echo ($_SESSION['prenom'].'  '.strtoupper($_SESSION['nom'])); ?></h1>
-          <p>Nombre de visite ce mois-ci : 32</p>
-          <p>&eacute;chantillons distribu&eacute;s ce mois-ci : 53</p>
+          <p>Nombre de visites : <?php echo ($_SESSION['nbVisite']); ?></p>
           <br>
-          <p>dernière visite: <a href="#">Philipe Philipovski</a></p>
-          <p>prochaine visite: <a href="#">Boris Borisovitch</a></p>
+          <p>dernière visite: <a href="#"><?php echo ($_SESSION['derniereVisiteNP']); ?></a></p>
+          <p>date: <?php echo ($_SESSION['derniereVisiteDate']); ?>
       </div>
     </div>
     <div hight="150px"></div>
@@ -58,7 +59,7 @@
       document.getElementById(y).classList.toggle("menuHide");
     }
     function longueurRecherche(frm, champ, longueur) {
-      if(document.forms[frm].elements[champ].value.length >= longueur)
+      if(document.forms[frm].elements[champ].value.length >= 3)
       {
         document.forms[frm].submit();
       }
