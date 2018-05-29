@@ -7,7 +7,7 @@
 	        <p>
 	          <input id="mdp" type="password" name="mdp" size="30" maxlength="45" placeholder="Mot de Passe">
 	        </p>
-	        <p id="boutonConnextion">
+	        <p class="bouton">
 						<input type="submit" 	name="valider"		value="Valider">
 						<input type="reset" 	name="annuler" 		value="Annuler">
 					</p>

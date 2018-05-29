@@ -1,15 +1,12 @@
 <?php
 /*================================================================================================== compte rendu (3)*/
 echo ("
-		
-			
 					<div style='display: block; margin-left: -600px; margin-top: -120px;'>
 						<div id='contenu'>
 						<fieldset><legend>compte rendu</legend>
-				<br><br><h2 align=center>SAISIES COMPTE RENDU </h2><br><br>	
+				<br><br><h2 align=center>SAISIES COMPTE RENDU </h2><br><br>
 									<div style='display: block; margin-left: -600px; margin-top: -120px;'>
 					<form>
-						
 						<div>
 							<br><button type='submit'>Soumettre</button>
 						</div>
@@ -34,9 +31,9 @@ echo ("
 								<h2>Nom et Prenom</h2>
 								<select name='lstPraticiens' STYLE='width:350px;' onchange='submit()'>");
 if (!isset($_REQUEST['lstPraticiens'])) {$choix = 'premier';} else {$choix =$_REQUEST['lstPraticiens'];}
-$i=1; 
-foreach ($lesLignes as $uneLigne) 
-{	
+$i=1;
+foreach ($lesLignes as $uneLigne)
+{
 	if($uneLigne['pNum'] == $choix or $choix == 'premier')
 	{
 		echo ("								<option selected value=\"".$uneLigne['pNum']."\">".$uneLigne['pNom']." ".$uneLigne['pPrenom']."</option>\n		");
@@ -48,9 +45,9 @@ foreach ($lesLignes as $uneLigne)
 		echo "								<option value=\"".$uneLigne['pNum']."\">".$uneLigne['pNom']." ".$uneLigne['pPrenom']."</option>\n";
 		$i=$i+1;
 	}
-}	           
-echo ('   
-						
+}
+echo ('
+
 								</select>
 							</form>
 						</div>

@@ -799,6 +799,22 @@ table.listeLegere td {
 .EC {
 	display: block;
 }
-.EC_ligne {
 
+/*style de la validation d'ajout d'un compte rendu */
+.boutonValider {
+	background-color: #36393e;
+	color: white;
+	border-style: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px 0px #36393e;
+	transition: background-color 300ms ease-in-out,
+	box-shadow 300ms ease-in-out;
+}
+.boutonValider:hover {
+	background-color: #606369;
+	box-shadow: 0px 0px 10px 0px #36393e;
+}
+.EC_tableValider {
+	display: block;
 }

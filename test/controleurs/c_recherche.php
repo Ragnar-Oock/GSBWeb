@@ -8,7 +8,6 @@ switch ($action) {
 		include("vues/v_entete.php");
 		$results = $pdo->getLesResultats($rechercher);
 		include("vues/v_afficherRecherche.php");
-		//echo($results);
 		$results = NULL;
 		break;
 	}

@@ -67,18 +67,10 @@ case 'supprimer':
 	}
 //----------------------------------------- VALIDATION
 case 'validerAjouter': {
+	include("vues/v_entete.php");
 	$ligne=0;
 	$lesEchantillons=$pdo->getEchantillon();
-	foreach ($lesEchantillons as $unEchantillon) {
-		if ($_REQUEST[$unEchantillon['mNum']]!=0) {
-			$lesEchantillonsValide[$ligne][0]=$unEchantillon['mNum'];
-			$lesEchantillonsValide[$ligne][1]=$_REQUEST[$unEchantillon['mNum']];
-			$ligne++;
-		}
-	}
-	foreach ($lesEchantillonsValide as $unEchantillonValide) {
-		echo $unEchantillonValide[0]." Quantité: ".$unEchantillonValide[1]."<br>";
-	}
+	include("vues/v_validerCompteRendu.php");
 	break;
 }
 case 'validerModifier':
@@ -119,7 +111,6 @@ case 'validerSupprimer':
 				$msg .= "Statut : ".$statut."\r\n";
 				$msg .= "Identifiant : ".$login."\r\n";
 				$msg .= "Mot de passe : ".$_REQUEST['ztMdp']."\r\n";
-				//$pdo->envoyerMail($mail, $sujet, $msg, $entete);
 				}
 		}
 		header ('location: index.php?choixTraitement=praticiens&action=voir&lstPraticiens='.$valeur);

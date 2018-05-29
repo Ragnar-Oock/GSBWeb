@@ -1,14 +1,14 @@
 <?php
 echo("
-	<div>
-		Il y a : ".count($lesCompteRendu));
+	<div class=\"RR_count\">
+		Vous avez renseign&eacute; ".count($lesCompteRendu));
 if(count($lesCompteRendu)>1)
 {
-	echo(" résultats.");
+	echo(" comptes rendus.");
 }
 else
 {
-	echo(" résultat.");
+	echo(" compte rendu.");
 }
 echo("</div>");
 
@@ -17,7 +17,7 @@ foreach ($lesCompteRendu as $unCR)
 	echo('
 		<div class="RR">
 			<div class="CR_titre">
-				'.$unCR["pLibelle"].'
+				'.$unCR["vMotif"].'
 			</div>
 			<div class="RR_date">
 				'.$unCR["Date"].'

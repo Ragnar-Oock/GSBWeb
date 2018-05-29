@@ -184,8 +184,7 @@ class PdoBD
 					FROM parametre INNER JOIN typeParametre ON typeParametre.tlId=parametre.pType
 					WHERE pType='$type'
 					".$filtre."
-					order by pIndice";
-
+					ORDER BY pIndice";
 		$rs = PdoBD::$monPdo->query($req);
 		if ($rs === false) {afficherErreurSQL("Probleme lors de la recherche dans la base de donn&eacute;es.", $req, PdoBD::$monPdo->errorInfo());}
 		$lesLignes = $rs->fetchAll();

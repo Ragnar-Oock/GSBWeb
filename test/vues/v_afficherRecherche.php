@@ -1,14 +1,14 @@
 <?php
 echo("
 	<div class=\"RR_count\">
-		Nous avons trouvé ".count($results));
+		Nous avons trouvé <strong>".count($results));
 if(count($results)>1)
 {
-	echo(" résultats.");
+	echo("</strong> résultats a votre recherche.");
 }
 else
 {
-	echo(" résultat.");
+	echo(" résultat a votre recherche.");
 }
 echo("</div>");
 
@@ -16,8 +16,30 @@ foreach ($results as $unResultat)
 {
 	echo('
 		<div class="RR">
-			<div class="RR_titre">
-				'.$unResultat["vMotif"].'
+			<div class="RR_titre">');
+			switch ($unResultat['vMotif']) {
+				case '1':
+				{
+					echo ('Baisse activité');
+					break;
+				}
+				case '2':
+				{
+					echo ('Rapport Annuel');
+					break;
+				}
+				case '3':
+				{
+					echo ('Actualisation annuelle');
+					break;
+				}
+				default:
+				{
+					echo "Motif inconnu.";
+					break;
+				}
+			}
+	echo ('
 			</div>
 			<div class="RR_date">
 				'.$unResultat["vDate"].'
@@ -31,13 +53,6 @@ foreach ($results as $unResultat)
 			<div>
 				<span class="RR_label">Visteur :</span> <a href="#">'.$unResultat["uNom"].' '.$unResultat["uPrenom"].'</a>
 			</div>
-		</div>
-		');
+		</div>');
 }
 ?>
-<script>
-	function lienPraticien(id) {
-		<?php $_REQUEST["lstPraticiens"]==id;
-		$rewrite = '1'?>
-	}
-</script>
